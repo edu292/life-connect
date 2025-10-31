@@ -12,6 +12,7 @@ CREATE TABLE usuarios (
     tipo VARCHAR(30) NOT NULL,
     rua VARCHAR(50),
     numero INTEGER,
+    bairro VARCHAR(100),
     cidade VARCHAR(100),
     estado VARCHAR(20),
     cep VARCHAR(50)

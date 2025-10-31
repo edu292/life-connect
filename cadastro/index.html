@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Registro</title>
+    <script src="../js/cadastro.js" defer></script>
+</head>
+<body>
+    <h1>Novo Registro</h1>
+    <form id="cadastro">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+        </div>
+        <div>
+            <label for="cpf_cnpj">CPF/CNPJ:</label>
+            <input type="text" name="cpf_cnpj" id="cpf_cnpj">
+        </div>
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" id="senha">
+        </div>
+        <div>
+            <label for="rua">Rua:</label>
+            <input type="text" name="rua" id="rua">
+            <label for="numero">Numero:</label>
+            <input type="text" name="numero" id="numero">
+            <label for="cep">CEP</label>
+            <input type="text" name="cep" id="cep">
+        </div>
+        <div>
+            <label for="bairro">Bairro:</label>
+            <input type="text" name="bairro" id="bairro">
+            <label for="cidade">Cidade:</label>
+            <input type="text" name="cidade" id="cidade">
+            <label for="estado">Estado:</label>
+            <input type="text" name="estado" id="estado">
+        </div>
+        <div>
+            <p>Tipo</p>
+            <label for="doador">Doador:</label>
+            <input type="radio" name="tipo" id="doador" value="doador">
+            <label for="receptor">Receptor:</label>
+            <input type="radio" name="tipo" id="receptor" value="receptor">
+            <label for="motorista">Motorista:</label>
+            <input type="radio" name="tipo" id="motorista" value="motorista">
+        </div>
+        <button type="submit">Registrar</button>
+    </form>
+</body>
+</html>

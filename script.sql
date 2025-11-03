@@ -45,6 +45,6 @@ CREATE TABLE lote_doacao (
     peso_item DECIMAL(10, 2),
     data_validade DATE,
     FOREIGN KEY (id_entrega) REFERENCES entrega(id),
-    FOREIGN KEY (id_alimento) REFERENCES alimentos(id),
+    FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
 );
 

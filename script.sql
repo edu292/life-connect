@@ -48,3 +48,16 @@ CREATE TABLE lote_doacao (
     FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
 );
 
+INSERT INTO usuarios(
+    cpf_cnpj,
+    nome,
+    email,
+    senha,
+    tipo
+)VALUES(
+    '111.111.111-11',
+    'admin',
+    'admin',
+    'admin123',
+    'admin'
+);

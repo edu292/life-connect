@@ -15,32 +15,78 @@ $senha = $_POST['senha'];
 $rua = $_POST['rua'];
 $numero = $_POST['numero'];
 $bairro = $_POST['bairro'];
+$estado = $_POST['estado'];
 $cidade = $_POST['cidade'];
 $cep = $_POST['cep'];
 $tipo = $_POST['tipo'];
 
-$stmt = $conexao->prepare('INSERT INTO usuarios (nome, email, cpf_cnpj, senha, rua, numero, bairro, cidade, cep, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-$stmt->bind_param(
-    "sssssissss",
-    $nome,
-    $email,
-    $cpf_cnpj,
-    $senha,
-    $rua,
-    $numero,
-    $bairro,
-    $cidade,
-    $cep,
-    $tipo
-);
-$stmt->execute();
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-if ($stmt->affected_rows > 0) {
-    $retorno['status'] = 'ok';
-    $retorno['mensagem'] = 'Usuário criado com sucesso';
+    $stmt = $conexao->prepare('UPDATE usuarios SET 
+                nome = ?, 
+                email = ?, 
+                cpf_cnpj = ?, 
+                senha = ?, 
+                rua = ?, 
+                numero = ?, 
+                bairro = ?, 
+                cidade = ?, 
+                estado = ?, 
+                cep = ?, 
+                tipo = ?
+            WHERE id = ?');
+
+    $stmt->bind_param(
+        "sssssisssssi",
+        $nome,
+        $email,
+        $cpf_cnpj,
+        $senha,
+        $rua,
+        $numero,
+        $bairro,
+        $cidade,
+        $estado,
+        $cep,
+        $tipo,
+        $id
+    );
+
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        $retorno['status'] = 'ok';
+        $retorno['mensagem'] = 'Usuário atualizado com sucesso';
+    } else {
+        $retorno['status'] = 'nok';
+        $retorno['mensagem'] = 'Não foi possivel atualizar o usuário';
+    }
 } else {
-    $retorno['status'] = 'nok';
-    $retorno['mensagem'] = 'Não foi possivel criar o usuário';
+    $stmt = $conexao->prepare('INSERT INTO usuarios (nome, email, cpf_cnpj, senha, rua, numero, bairro, cidade, estado, cep, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->bind_param(
+        "sssssisssss",
+        $nome,
+        $email,
+        $cpf_cnpj,
+        $senha,
+        $rua,
+        $numero,
+        $bairro,
+        $cidade,
+        $estado,
+        $cep,
+        $tipo
+    );
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        $retorno['status'] = 'ok';
+        $retorno['mensagem'] = 'Usuário criado com sucesso';
+    } else {
+        $retorno['status'] = 'nok';
+        $retorno['mensagem'] = 'Não foi possivel criar o usuário';
+    }
 }
 
 $stmt->close();

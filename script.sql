@@ -54,7 +54,7 @@ INSERT INTO usuarios(
     email,
     senha,
     tipo
-)VALUES(
+) VALUES (
     '111.111.111-11',
     'admin',
     'admin',

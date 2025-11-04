@@ -1,7 +1,7 @@
 <?php
 $servidor = "localhost:3307";
 $usuario = "root";
-$senha = "1m0pdrtv";
+$senha = "";
 $banco = "life_connect";
 
 $conexao = new mysqli($servidor, $usuario, $senha, $banco);

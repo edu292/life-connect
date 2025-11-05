@@ -10,10 +10,13 @@ $retorno = [
 
 if (isset($_GET['id-categoria'])) {
     $id_categoria = $_GET['id-categoria'];
-    if (isset($_GET['quantidade'])) {
-        $stmt = $conexao->prepare("SELECT COUNT(*) FROM alimentos WHERE id_categoria = ?");
+
+    if (isset($_GET['contar'])) {
+        $stmt = $conexao->prepare("SELECT COUNT(*) AS quantidade FROM alimentos WHERE id_categoria = ?");
+    } else {
+        $stmt = $conexao->prepare("SELECT * FROM alimentos WHERE id_categoria = ?");
     }
-    $stmt = $conexao->prepare("SELECT * FROM alimentos WHERE id_categoria = ?");
+
     $stmt->bind_param("i", $id_categoria);
 } else if (isset($_GET['id'])) {
     $id = $_GET['id'];

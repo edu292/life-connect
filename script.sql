@@ -65,7 +65,7 @@ INSERT INTO usuarios(
 INSERT INTO Categorias (nome) VALUES ('Grãos e Cereais');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, name) VALUES
+INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Arroz'),
     (@cat_id, 'Feijão Preto'),
     (@cat_id, 'Feijão Carioca'),
@@ -79,7 +79,7 @@ INSERT INTO Alimentos (id_categoria, name) VALUES
 INSERT INTO Categorias (nome) VALUES ('Enlatados e Conservas');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, name) VALUES
+INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Milho em Conserva'),
     (@cat_id, 'Ervilha em Conserva'),
     (@cat_id, 'Molho de Tomate'),
@@ -89,7 +89,7 @@ INSERT INTO Alimentos (id_categoria, name) VALUES
 INSERT INTO Categorias (nome) VALUES ('Óleos, Temperos e Açúcares');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, name) VALUES
+INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Óleo de Soja'),
     (@cat_id, 'Sal Refinado'),
     (@cat_id, 'Açúcar Refinado'),
@@ -102,7 +102,7 @@ INSERT INTO Alimentos (id_categoria, name) VALUES
 INSERT INTO Categorias (nome) VALUES ('Biscoitos e Pães');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, name) VALUES
+INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Biscoito Cream Cracker'),
     (@cat_id, 'Biscoito Recheado'),
     (@cat_id, 'Pão de Forma'),
@@ -111,7 +111,7 @@ INSERT INTO Alimentos (id_categoria, name) VALUES
 INSERT INTO Categorias (nome) VALUES ('Bebidas');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, name) VALUES
+INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Leite'),
     (@cat_id, 'Suco em Caixa'),
     (@cat_id, 'Suco em Pó');

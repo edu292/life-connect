@@ -1,11 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Doação</title>
+    <script src="../js/formulario_categoria.js" defer=""></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #3c3f41;
+            color: #e0e0e0;
+        }
+
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #2b2b2b;
+            text-align: center;
+            height: 70px;
+            line-height: 70px;
+            color: white;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                    "formulario-categoria tabela-alimentos"
+                    "formulario-alimento tabela-alimentos"
+                    "criar-categoria tabela-alimentos";
+            height: 100%;
+            padding: 20px;
+            gap: 0 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #formulario-categoria {
+            grid-area: formulario-categoria;
+        }
+
+        #formulario-alimento {
+            grid-area: formulario-alimento;
+            justify-content: center;
+        }
+
+        footer {
+            margin: 0 auto;
+            display: block;
+        }
+
+        input, select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .table-wrapper {
+            grid-area: tabela-alimentos;
+        }
+
+        .tabela {
+            width: 100%;
+        }
+
+        .tabela th {
+            height: 50px;
+            background-color: #2b2b2b;
+            text-align: center;
+            color: white;
+        }
+
+        .tabela td {
+            height: 50px;
+            padding-left: 10px;
+        }
+
+        .tabela th:last-child, .tabela td:last-child {
+            text-align: center;
+        }
+
+        .tabela tbody tr:nth-child(even) {
+            background-color: #a5a5a5;
+        }
+
+        tbody {
+            align-items: flex-start;
+            background-color: lightgray;
+            color: black;
+        }
+
+        #corpo-tabela {
+            height: fit-content;
+        }
+
+        button {
+            border-style: none;
+            height: 40px;
+            padding: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 0 5px;
+            background-color: #2b2b2b;
+        }
+
+        button:hover {
+            filter: brightness(90%);
+            transform: scale(1.05);
+        }
+
+        .verde {
+            background-color: #13CE66;;
+        }
+
+        .vermelho {
+            background-color: #FF4949;
+        }
+    </style>
 </head>
 <body>
+<div class="page-wrapper">
+    <header>
+        <h1>Categoria</h1>
+    </header>
+    <main>
+        <form id="formulario-categoria">
+            <label for="name">Categoria:</label>
+            <input type="text" name="name" id="name">
+        </form>
+        
+        <form class="formulario-alimento" id="formulario-alimento">
+            <label for="alimento">Alimento:</label>
+            <input type="text" id="alimento" name="alimento" placeholder="Especifique o alimento">
+            <footer>
+                <button type="submit" class="verde">Salvar</button>
+                <button type="reset" class="vermelho">Limpar</button>
+            </footer>
+        </form>
+        
+        <button id="botao-criar-doacao" type="submit" form="formulario-categoria">Criar Categoria</button>
+        
+        <section class="table-wrapper">
+            <table class="tabela">
+                <thead>
+                <tr>
+                    <th>Alimento</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody id="corpo-tabela">
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
 
-</body>
-</html>
+</body></html>

@@ -11,13 +11,17 @@ async function excluir(id) {
 async function carregarDados() {
     const resposta = await fetch('../php/categoria_get.php')
     const retorno = await resposta.json();
+    const categorias = retorno.data
 
     let html = ''
-    for (const categoria of retorno) {
+    for (const categoria of categorias) {
+        const contadorResposta = await fetch(`../php/alimento_get.php?id-categoria=${categoria.id}&contar=true`);
+        const contadorRetorno = await contadorResposta.json();
+        const contador = contadorRetorno.data[0].quantidade;
         html += `
             <tr>
                 <td>${categoria.nome}</td>
-                <td>Conta ae mermão</td>
+                <td>${contador}</td>
                 <td>
                     <a href="../categorias/formulario.html?${categoria.id}">Alterar</a>
                     <a href="javascript:excluir(${categoria.id})">Excluir</a>
@@ -25,9 +29,9 @@ async function carregarDados() {
             </tr>
         `
     }
+    tabela.innerHTML = html;
 }
 
-
-const botaoNovo = document.getElementById('botao-novo');
 const tabela = document.getElementById('tabela');
+carregarDados();
 

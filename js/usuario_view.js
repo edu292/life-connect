@@ -14,14 +14,13 @@ async function logoff() {
     if(resposta.status === "ok"){
         window.location.href = '../login/';
     }else{
-        alert("falha ao efetuar logff")
+        alert("falha ao efetuar logoff")
     }
 }
 
 async function carregarDados() {
     const retorno = await fetch("../php/usuario_get.php");
     const resposta = await retorno.json();
-    console.log(resposta);
     if (resposta.status === "ok") {
         const usuarios = resposta.data;
         let html = '';

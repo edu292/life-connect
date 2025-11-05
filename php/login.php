@@ -14,8 +14,7 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 
 if ($resultado->num_rows == 1) {
-    $tabela = $resultado->fetch_all(mode: MYSQLI_ASSOC);
-    $usuario = $tabela[0];
+    $usuario = $resultado->fetch_assoc();
     $retorno['status'] = 'ok';
     $retorno['mensagem'] = 'Registro encontrado';
     $retorno['data'] = $usuario;

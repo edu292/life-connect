@@ -1,11 +1,22 @@
 const formCategoria = document.getElementById('formulario-categoria');
 const formAlimento = document.getElementById('formulario-alimento');
-const idCategoria = new URLSearchParams(window.location.search).get('id');
-const tabela = document.getElementById('tabela');
+let idCategoria = new URLSearchParams(window.location.search).get('id');
+const tabela = document.getElementById('corpo-tabela');
+let idAlimento = null;
 
+async function criarCategoria(){
+    let url = '../php/categoria_save.php';
+    const retorno = await fetch(url);
+    const resposta = await retorno.json();
+    idCategoria = resposta.data;
+};
+
+    
 if (idCategoria) {
     completarFormularioCategoria(idCategoria);
     carregarDados();
+}else{
+    criarCategoria();
 }
 
 formCategoria.addEventListener('submit', (event) => {
@@ -14,33 +25,103 @@ formCategoria.addEventListener('submit', (event) => {
 });
 
 async function salvarCategoria() {
-    const data = new FormData(formCadastro);
-    let url = '../php/cadastro.php';
-    if (idUsuario) {
-        url += `?id=${idUsuario}`;
+    const data = new FormData(formCategoria);
+    let url = '../php/categoria_save.php';
+    if (idCategoria) {
+        url += `?id=${idCategoria}`;
     }
     const retorno = await fetch(url, {
         method: 'POST',
-        body: data,
+        body: data
     });
     const resposta = await retorno.json();
     console.log(resposta);
-    window.location.href = document.referrer;
+    window.location.href = "../categorias/index.html"
 }
 
 async function completarFormularioCategoria(id) {
     const retorno = await fetch(`../php/categoria_get.php?id=${id}`);
     const resposta = await retorno.json();
 
-    const usuario = resposta.data[0]
-    console.log(usuario);
-    for (const key in usuario) {
-        if (formCadastro[key]) {
-            formCadastro[key].value = usuario[key];
+    const categoria = resposta.data[0]
+    for (const key in categoria) {
+        if (formCategoria[key]) {
+            formCategoria[key].value = categoria[key];
         }
     }
 }
 
-function carregarDados() {
 
+//ALIMENTOS//
+//--------------------------------------------------------------------------------------------//
+
+async function carregarDados() {
+    const retorno = await fetch(`../php/alimento_get.php?id-categoria=${idCategoria}`);
+    const resposta = await retorno.json();
+    if (resposta.status === "ok") {
+        const alimentos = resposta.data;
+        let html = '';
+        for (let alimento of alimentos) {
+            html += `<tr>
+                        <td>${alimento.nome}</td>
+                        <td>
+                            <a class="btn btn-secondary btn-sm" href = '#' onclick = 'completarFormularioAlimento(${alimento.id})'>Alterar</a>
+                            <a class="btn btn-danger btn-sm" href = '#' onclick = 'excluir(${alimento.id})'>Excluir</a>
+                        </td>
+                    </tr>`;
+        }
+        tabela.innerHTML += html
+    } else {
+        alert("Erro:" + resposta.mensagem);
+    }
 }
+
+async function excluir(idAlimento) {
+    const retorno = await fetch("../php/alimento_delete.php?id="+idAlimento);
+    const resposta = await retorno.json();
+    if(resposta.status === "ok"){
+        window.location.reload();
+    }else{
+        alert("ERRO:" + resposta.mensagem);
+    }
+}
+
+
+async function salvarAlimento() {
+    const data = new FormData(formAlimento);
+    let url = '../php/alimento_save.php';
+    if (idAlimento) {
+        url += `?id=${idAlimento}`;
+    }
+    else{
+        url += `?idCategoria=${idCategoria}`;
+    }
+    const retorno = await fetch(url, {
+        method: 'POST',
+        body: data
+    });
+    const resposta = await retorno.json();
+    console.log(resposta);
+
+    //Referrer volta pra pagina anterior e recarrega, volta pra url que você tava antes//
+    window.location.reload();
+}
+
+
+async function completarFormularioAlimento(id) {
+    idAlimento = id;
+    const retorno = await fetch(`../php/alimento_get.php?id=${id}`);
+    const resposta = await retorno.json();
+
+    const alimento = resposta.data[0]
+    for (const key in alimento) {
+        if (formAlimento[key]) {
+            formAlimento[key].value = alimento[key];
+        }
+    }
+}
+
+formAlimento.addEventListener("submit", (event) => {
+    event.preventDefault();
+    salvarAlimento();
+});

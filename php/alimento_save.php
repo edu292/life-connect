@@ -9,25 +9,25 @@ $retorno = [
 ];
 
 $nome = $_POST['nome'];
+$idCategoria = $_GET['idCategoria'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE categorias SET nome = ? WHERE id = ?');
+    $stmt = $conexao->prepare('UPDATE alimentos SET nome = ? WHERE id = ?');
     $stmt->bind_param('si', $nome, $id);
 } else {
-    $stmt = $conexao->prepare('INSERT INTO categorias (nome) VALUES (?)');
-    $stmt->bind_param("s", $nome);
+    $stmt = $conexao->prepare('INSERT INTO alimentos (nome, id_categoria) VALUES (?, ?)');
+    $stmt->bind_param("si", $nome, $idCategoria);
 }
 
 $stmt->execute();
 
 if ($stmt->affected_rows == 1) {
     $retorno['status'] = 'ok';
-    $retorno['mensagem'] = 'Categoria atualizada com sucesso';
-    $retorno['data'] = $conexao->insert_id;
+    $retorno['mensagem'] = 'Alimento atualizado com sucesso';
 } else {
     $retorno['status'] = 'nok';
-    $retorno['mensagem'] = 'Não foi possivel atualizar a categoria';
+    $retorno['mensagem'] = 'Não foi possivel atualizar o alimento';
 }
 
 $stmt->close();

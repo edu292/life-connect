@@ -23,7 +23,7 @@ if (isset($_GET['id-categoria'])) {
     $stmt = $conexao->prepare("SELECT * FROM alimentos WHERE id = ?");
     $stmt->bind_param("i", $id);
 } else {
-    $stmt = $conexao->prepare("SELECT * FROM categorias");
+    $stmt = $conexao->prepare("SELECT * FROM alimentos");
 }
 
 $stmt->execute();

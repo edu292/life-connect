@@ -1,5 +1,5 @@
 async function excluir(id) {
-    const resposta = await fetch(`../php/categoria_delete?id=${id}`);
+    const resposta = await fetch(`../php/categoria_delete.php?id=${id}`);
     const retorno = await resposta.json();
     if (retorno.status === 'ok') {
         window.location.reload();
@@ -23,7 +23,7 @@ async function carregarDados() {
                 <td>${categoria.nome}</td>
                 <td>${contador}</td>
                 <td>
-                    <a href="../categorias/formulario.html?${categoria.id}">Alterar</a>
+                    <a href="../categorias/formulario.html?id=${categoria.id}">Alterar</a>
                     <a href="javascript:excluir(${categoria.id})">Excluir</a>
                 </td>
             </tr>

@@ -12,13 +12,13 @@ formCadastro.addEventListener('submit', (event) => {
 
 async function cadastro() {
     const data = new FormData(formCadastro);
-    let url = '../php/cadastro.php';
+    let url = '../php/usuario_save.php';
     if (idUsuario) {
         url += `?id=${idUsuario}`;
     }
     const retorno = await fetch(url, {
         method: 'POST',
-        body: data,
+        body: data
     });
     const resposta = await retorno.json();
     console.log(resposta);

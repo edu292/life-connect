@@ -1,5 +1,5 @@
-<html lang="pt-BR">
-
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -163,13 +163,13 @@
         </header>
         <main>
             <form id="formulario-categoria">
-                <label for="nome">Categoria:</label>
-                <input type="text" name="nome" id="nome">
+                <label for="nome-categoria">Categoria:</label>
+                <input type="text" name="nome" id="nome-categoria">
             </form>
 
-            <form class="formulario-alimento" id="formulario-alimento">
-                <label for="nome">Alimento:</label>
-                <input type="text" id="nome" name="nome" placeholder="Especifique o alimento">
+            <form class="formulario-alimento" id="formulario-alimento" style="opacity: 0">
+                <label for="nome-alimento">Alimento:</label>
+                <input type="text" id="nome-alimento" name="nome" placeholder="Especifique o alimento">
                 <footer>
                     <button type="submit" class="verde">Salvar</button>
                     <button type="reset" class="vermelho">Limpar</button>
@@ -179,7 +179,7 @@
             <button id="botao-criar-doacao" type="submit" form="formulario-categoria">Criar Categoria</button>
 
             <section class="table-wrapper">
-                <table class="tabela">
+                <table class="tabela" id="tabela" style="opacity: 0">
                     <thead>
                         <tr>
                             <th>Alimento</th>

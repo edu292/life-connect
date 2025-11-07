@@ -1,21 +1,17 @@
 const formCategoria = document.getElementById('formulario-categoria');
 const formAlimento = document.getElementById('formulario-alimento');
 let idCategoria = new URLSearchParams(window.location.search).get('id');
-const tabela = document.getElementById('corpo-tabela');
+const tabela = document.getElementById('tabela');
+const corpoTabela = document.getElementById('corpo-tabela');
 let idAlimento = null;
 const botao_voltar = document.getElementById("botao_voltar")
-
-async function criarCategoria(){
-    let url = '../php/categoria_save.php';
-    const retorno = await fetch(url);
-    const resposta = await retorno.json();
-    idCategoria = resposta.data;
-};
 
     
 if (idCategoria) {
     completarFormularioCategoria(idCategoria);
     carregarDados();
+    tabela.style.opacity = '1';
+    formAlimento.style.opacity = '1';
 }
 
 formCategoria.addEventListener('submit', (event) => {
@@ -25,7 +21,7 @@ formCategoria.addEventListener('submit', (event) => {
 
 async function salvarCategoria() {
     const data = new FormData(formCategoria);
-    let url = '../php/categoria_save.php';
+    let url = '../php/categoria_save.php'
     if (idCategoria) {
         url += `?id=${idCategoria}`;
     }
@@ -34,8 +30,12 @@ async function salvarCategoria() {
         body: data
     });
     const resposta = await retorno.json();
-    console.log(resposta);
-    window.location.href = "../categorias/index.html"
+    if (!idCategoria) {
+        idCategoria = resposta.data;
+        window.location.href = document.location.href+`?id=${idCategoria}`;
+    } else {
+        window.location.href = "../categorias/index.html"
+    }
 }
 
 async function completarFormularioCategoria(id) {
@@ -51,7 +51,7 @@ async function completarFormularioCategoria(id) {
 }
 
 botao_voltar.addEventListener("click", () => {
-    window.location.href = '../categorias/index.html'
+    window.location.href = '../categorias/index.html';
 });
 
 //ALIMENTOS//
@@ -72,9 +72,7 @@ async function carregarDados() {
                         </td>
                     </tr>`;
         }
-        tabela.innerHTML += html
-    } else {
-        alert("Erro:" + resposta.mensagem);
+        corpoTabela.innerHTML += html
     }
 }
 

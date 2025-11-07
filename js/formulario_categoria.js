@@ -3,6 +3,7 @@ const formAlimento = document.getElementById('formulario-alimento');
 let idCategoria = new URLSearchParams(window.location.search).get('id');
 const tabela = document.getElementById('corpo-tabela');
 let idAlimento = null;
+const botao_voltar = document.getElementById("botao_voltar")
 
 async function criarCategoria(){
     let url = '../php/categoria_save.php';
@@ -15,8 +16,6 @@ async function criarCategoria(){
 if (idCategoria) {
     completarFormularioCategoria(idCategoria);
     carregarDados();
-}else{
-    criarCategoria();
 }
 
 formCategoria.addEventListener('submit', (event) => {
@@ -51,6 +50,9 @@ async function completarFormularioCategoria(id) {
     }
 }
 
+botao_voltar.addEventListener("click", () => {
+    window.location.href = '../categorias/index.html'
+});
 
 //ALIMENTOS//
 //--------------------------------------------------------------------------------------------//
@@ -102,9 +104,7 @@ async function salvarAlimento() {
     });
     const resposta = await retorno.json();
     console.log(resposta);
-
-    //Referrer volta pra pagina anterior e recarrega, volta pra url que você tava antes//
-    window.location.reload();
+    window.location.reload()
 }
 
 
@@ -124,4 +124,5 @@ async function completarFormularioAlimento(id) {
 formAlimento.addEventListener("submit", (event) => {
     event.preventDefault();
     salvarAlimento();
+    window.location.reload()
 });

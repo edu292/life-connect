@@ -2,7 +2,7 @@ const tabela = document.getElementById('tabela');
 carregarDados();
 
 document.getElementById("novo").addEventListener("click", () =>{
-    window.location.href = '../cadastro/index.html'
+    window.location.href = '../usuarios/formulario.html'
 })
 document.getElementById("logoff").addEventListener("click", () =>{
     logoff();
@@ -32,7 +32,7 @@ async function carregarDados() {
                         <td>${usuario.senha}</td>
                         <td>${usuario.tipo}</td>
                         <td>
-                            <a class="btn btn-secondary btn-sm" href = '../cadastro/index.html?id=${usuario.id}'>Alterar</a>
+                            <a class="btn btn-secondary btn-sm" href = '../usuarios/formulario.html?id=${usuario.id}'>Alterar</a>
                             <a class="btn btn-danger btn-sm" href = '#' onclick = 'excluir(${usuario.id})'>Excluir</a>
                         </td>
                     </tr>`;

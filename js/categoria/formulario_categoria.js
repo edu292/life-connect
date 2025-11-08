@@ -21,7 +21,7 @@ formCategoria.addEventListener('submit', (event) => {
 
 async function salvarCategoria() {
     const data = new FormData(formCategoria);
-    let url = '../php/categoria_save.php'
+    let url = '../php/categoria/categoria_save.php'
     if (idCategoria) {
         url += `?id=${idCategoria}`;
     }
@@ -39,7 +39,7 @@ async function salvarCategoria() {
 }
 
 async function completarFormularioCategoria(id) {
-    const retorno = await fetch(`../php/categoria_get.php?id=${id}`);
+    const retorno = await fetch(`../php/categoria/categoria_get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const categoria = resposta.data[0]
@@ -58,7 +58,7 @@ botao_voltar.addEventListener("click", () => {
 //--------------------------------------------------------------------------------------------//
 
 async function carregarDados() {
-    const retorno = await fetch(`../php/alimento_get.php?id-categoria=${idCategoria}`);
+    const retorno = await fetch(`../php/alimento/alimento_get.php?id-categoria=${idCategoria}`);
     const resposta = await retorno.json();
     if (resposta.status === "ok") {
         const alimentos = resposta.data;
@@ -77,7 +77,7 @@ async function carregarDados() {
 }
 
 async function excluir(idAlimento) {
-    const retorno = await fetch("../php/alimento_delete.php?id="+idAlimento);
+    const retorno = await fetch("../php/alimento/alimento_delete.php?id="+idAlimento);
     const resposta = await retorno.json();
     if(resposta.status === "ok"){
         window.location.reload();
@@ -89,7 +89,7 @@ async function excluir(idAlimento) {
 
 async function salvarAlimento() {
     const data = new FormData(formAlimento);
-    let url = '../php/alimento_save.php';
+    let url = '../php/alimento/alimento_save.php';
     if (idAlimento) {
         url += `?id=${idAlimento}`;
     }
@@ -108,7 +108,7 @@ async function salvarAlimento() {
 
 async function completarFormularioAlimento(id) {
     idAlimento = id;
-    const retorno = await fetch(`../php/alimento_get.php?id=${id}`);
+    const retorno = await fetch(`../php/alimento/alimento_get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const alimento = resposta.data[0]

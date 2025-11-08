@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categoria</title>
-    <script src="../js/formulario_categoria.js" defer=""></script>
+    <title>Doação</title>
+    <script src="../js/formulario_doacao.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         * {
@@ -42,12 +42,8 @@
 
         main {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: auto 1fr auto;
-            grid-template-areas:
-                "formulario-categoria tabela-alimentos"
-                "formulario-alimento tabela-alimentos"
-                "criar-categoria tabela-alimentos";
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: "formulario tabela-doacoes";
             height: 100%;
             padding: 20px;
             gap: 0 20px;
@@ -59,18 +55,15 @@
             gap: 20px;
         }
 
-        #formulario-categoria {
-            grid-area: formulario-categoria;
-        }
-
-        #formulario-alimento {
-            grid-area: formulario-alimento;
-            justify-content: center;
+        #formulario-doacao {
+            grid-area: formulario;
+            justify-content: flex-start;
         }
 
         footer {
             margin: 0 auto;
             display: block;
+            margin-top: 20px;
         }
 
         input,
@@ -82,7 +75,7 @@
         }
 
         .table-wrapper {
-            grid-area: tabela-alimentos;
+            grid-area: tabela-doacoes;
         }
 
         .tabela {
@@ -90,7 +83,7 @@
         }
 
         .tabela th {
-            height: 50px;
+            height: 60px;
             background-color: #2b2b2b;
             text-align: center;
             color: white;
@@ -144,9 +137,6 @@
         .vermelho {
             background-color: #FF4949;
         }
-        #botao-criar-doacao{
-            color: black;
-        }
     </style>
 </head>
 
@@ -154,35 +144,46 @@
     <div class="page-wrapper">
         <header>
             <div>
-                <button type="button" id="botao_voltar" name="voltar" value="votar" class="btn btn-success">Voltar</button>
+                <a href="../home/doador.html"><button type="button" id="botao_voltar" name="voltar" value="votar" class="btn btn-success">Voltar</button></a>
             </div>
-            
-            <h1>Categoria</h1>
-            
-            <span></span>
+            <h1>Nova Doação</h1>
         </header>
         <main>
-            <form id="formulario-categoria">
-                <label for="nome-categoria">Categoria:</label>
-                <input type="text" name="nome" id="nome-categoria">
-            </form>
+            <form id="formulario-doacao">
+                
+                <label for="nome-lote">Nome do lote da doação:</label>
+                <input type="text" name="nome-lote" id="nome-lote" placeholder="Especifique o nome do lote">
 
-            <form class="formulario-alimento" id="formulario-alimento" style="opacity: 0">
-                <label for="nome-alimento">Alimento:</label>
-                <input type="text" id="nome-alimento" name="nome" placeholder="Especifique o alimento">
-                <footer>
-                    <button type="submit" class="verde">Salvar</button>
+                <label for="alimento">Alimento que será doado:</label>
+                <input type="text" id="alimento" name="alimento" placeholder="Especifique o alimento">
+
+                <label for="quantidade">Quantidade de itens que serão doados:</label>
+                <input type="number" id="quantidade" name="quantidade" placeholder="Quantidade de itens">
+
+                <label for="peso">Peso de cada item:</label>
+                <input type="number" id="peso" name="peso" placeholder="Peso em kg">
+
+                <label for="validade">Prazo de valdiade:</label>
+                <input type="date" id="validade" name="validade" placeholder="dd/mm/aaaa">
+
+                <div>
+                    <button type="submit" class="verde">Salvar lote</button>
                     <button type="reset" class="vermelho">Limpar</button>
+                </div>
+                <footer>
+                    <button type="submit" class="verde">Criar doação</button>
                 </footer>
             </form>
 
-            <button id="botao-criar-doacao" type="submit" form="formulario-categoria">Criar Categoria</button>
-
             <section class="table-wrapper">
-                <table class="tabela" id="tabela" style="opacity: 0">
+                <table class="tabela" id="tabela">
                     <thead>
                         <tr>
+                            <th>Lote</th>
                             <th>Alimento</th>
+                            <th>Quantidade</th>
+                            <th>Peso total</th>
+                            <th>Prazo de validade</th>
                             <th>Ações</th>
                         </tr>
                     </thead>

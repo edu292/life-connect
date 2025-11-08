@@ -23,7 +23,7 @@ async function logoff() {
 }
 
 async function carregarDados() {
-    const retorno = await fetch("../php/usuario_get.php");
+    const retorno = await fetch("../php/usuario/usuario_get.php");
     const resposta = await retorno.json();
     if (resposta.status === "ok") {
         const usuarios = resposta.data;
@@ -48,7 +48,7 @@ async function carregarDados() {
 }
 
 async function excluir(id) {
-    const retorno = await fetch("../php/usuario_delete.php?id="+id);
+    const retorno = await fetch("../php/usuario/usuario_delete.php?id="+id);
     const resposta = await retorno.json();
     if(resposta.status === "ok"){
         window.location.reload();

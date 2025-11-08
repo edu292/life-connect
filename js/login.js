@@ -10,7 +10,7 @@ async function logar() {
     const data = new FormData(formLogin);
     const retorno = await fetch('../php/login.php', {
         method: 'POST',
-        body: data,
+        body: data
     });
 
     const resposta = await retorno.json();

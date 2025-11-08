@@ -23,11 +23,11 @@ $stmt->execute();
 
 if ($stmt->affected_rows == 1) {
     $retorno['status'] = 'ok';
-    $retorno['mensagem'] = 'Categoria atualizada com sucesso';
+    $retorno['mensagem'] = 'Lote de doação atualizado com sucesso';
     $retorno['data'] = $conexao->insert_id;
 } else {
     $retorno['status'] = 'nok';
-    $retorno['mensagem'] = 'Não foi possivel atualizar a categoria';
+    $retorno['mensagem'] = 'Não foi possivel atualizar o lote de doação';
 }
 
 $stmt->close();

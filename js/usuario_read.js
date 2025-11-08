@@ -1,6 +1,10 @@
 const tabela = document.getElementById('tabela');
 carregarDados();
 
+const botao_voltar = document.getElementById("botao_voltar").addEventListener("click",() => {
+    window.location.href = "../home/admin.html"
+})
+
 document.getElementById("novo").addEventListener("click", () =>{
     window.location.href = '../usuarios/formulario.html'
 })

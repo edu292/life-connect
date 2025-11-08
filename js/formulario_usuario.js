@@ -1,3 +1,7 @@
+const botao_voltar = document.getElementById("botao_voltar").addEventListener("click",() => {
+    window.location.href = document.referrer;
+})
+
 const formCadastro = document.getElementById('cadastro');
 const idUsuario = new URLSearchParams(window.location.search).get('id');
 

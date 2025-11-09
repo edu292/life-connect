@@ -23,6 +23,8 @@ async function salvarDoacao() {
     let url = '../php/doacao/save.php'
     if (idDoacao) {
         url += `?id=${idDoacao}`;
+    } else {
+        data.append('id-doador', localStorage.getItem('id'))
     }
     const retorno = await fetch(url, {
         method: 'POST',

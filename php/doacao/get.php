@@ -10,10 +10,26 @@ $retorno = [
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare("SELECT * FROM doacao WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    $stmt = $conexao->prepare('SELECT * FROM doacoes WHERE id = ?');
+    $stmt->bind_param('i', $id);
+} elseif (isset($_GET['status'])) {
+    $status = $_GET['status'];
+    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE status = ?");
+    $stmt->bind_param('s', $status);
+} elseif (isset($_GET['id-doador'])) {
+    $idDoador = $_GET['id-doador'];
+    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE id_doador = ?");
+    $stmt->bind_param('i', $idDoador);
+} elseif (isset($_GET['id-receptor'])) {
+    $idReceptor = $_GET['id-receptor'];
+    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE id_receptor = ?");
+    $stmt->bind_param('i', $idReceptor);
+} elseif (isset($_GET['id-motorista'])) {
+    $idMotorista = $_GET['id-motorista'];
+    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE id_motorista = ?");
+    $stmt->bind_param('i', $idMotorista);
 } else {
-    $stmt = $conexao->prepare("SELECT * FROM doacao");
+    $stmt = $conexao->prepare("SELECT * FROM doacoes");
 }
 
 $stmt->execute();
@@ -24,13 +40,13 @@ if ($resultado->num_rows > 0) {
 
     $retorno = [
         'status' => 'ok',
-        'mensagem' => 'Registros encontrados',
+        'mensagem' => 'Doações encontrados',
         'data' => $tabela
     ];
 } else {
     $retorno = [
         'status' => 'nok',
-        'mensagem' => 'Nenhum registro encontrado',
+        'mensagem' => 'Nenhuma doação encontrada',
         'data' => []
     ];
 }

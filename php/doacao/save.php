@@ -1,6 +1,6 @@
 <?php
 global $conexao;
-include_once('../conexao.php');
+include_once '../conexao.php';
 
 $retorno = [
     'status' => '',   // ok ou nok
@@ -9,14 +9,15 @@ $retorno = [
 ];
 
 $titulo = $_POST['titulo'];
+$idDoador = $_POST['id-doador'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE doacao SET titulo = ? WHERE id = ?');
+    $stmt = $conexao->prepare('UPDATE doacoes SET titulo = ? WHERE id = ?');
     $stmt->bind_param('si', $titulo, $id);
 } else {
-    $stmt = $conexao->prepare('INSERT INTO doacao (titulo) VALUES (?)');
-    $stmt->bind_param("s", $titulo);
+    $stmt = $conexao->prepare('INSERT INTO doacoes (titulo, id_doador) VALUES (?, ?)');
+    $stmt->bind_param("si", $titulo, $idDoador);
 }
 
 $stmt->execute();

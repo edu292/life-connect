@@ -19,17 +19,17 @@ if (isset($_GET['id-doacao'])) {
             l.peso_unidade,
             l.data_validade,
             l.peso_unidade * l.quantidade AS peso_total
-        FROM lote_doacao l
+        FROM lotes_doacao l
         INNER JOIN alimentos a ON l.id_alimento = a.id
         WHERE l.id_doacao = ?
     ");
     $stmt->bind_param("i", $id_doacao);
 } else if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare("SELECT * FROM lote_doacao WHERE id = ?");
+    $stmt = $conexao->prepare("SELECT * FROM lotes_doacao WHERE id = ?");
     $stmt->bind_param("i", $id);
 } else {
-    $stmt = $conexao->prepare("SELECT * FROM lote_doacao");
+    $stmt = $conexao->prepare("SELECT * FROM lotes_doacao");
 }
 
 $stmt->execute();

@@ -9,7 +9,7 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    tipo VARCHAR(30) NOT NULL,
+    tipo ENUM('admin', 'doador', 'receptor', 'motorista') NOT NULL,
     rua VARCHAR(50),
     numero INTEGER,
     bairro VARCHAR(100),
@@ -30,44 +30,44 @@ CREATE TABLE alimentos (
     FOREIGN KEY (id_categoria) REFERENCES categorias(id)
 );
 
-CREATE TABLE doacao (
+CREATE TABLE doacoes (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    id_doador INTEGER NOT NULL,
+    id_receptor INTEGER,
+    id_motorista INTEGER,
     titulo VARCHAR(100),
-    descricao VARCHAR(100),
     data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('DISPONIVEL', 'ACEITA', 'EM TRANSITO', 'COUNCLUIDA') NOT NULL DEFAULT 'DISPONIVEL',
+    status ENUM('disponivel', 'aceita', 'em transito', 'concluida') NOT NULL DEFAULT 'disponivel',
+    FOREIGN KEY (id_doador) REFERENCES usuarios(id),
+    FOREIGN KEY (id_receptor) REFERENCES usuarios(id),
+    FOREIGN KEY (id_motorista) REFERENCES usuarios(id)
 );
 
-CREATE TABLE lote_doacao (
+CREATE TABLE lotes_doacao (
      id INTEGER PRIMARY KEY AUTO_INCREMENT,
      id_doacao INTEGER NOT NULL,
      id_alimento INTEGER NOT NULL,
      quantidade INTEGER,
      peso_unidade DECIMAL(10, 2),
      data_validade DATE,
-     FOREIGN KEY (id_doacao) REFERENCES doacao(id),
+     FOREIGN KEY (id_doacao) REFERENCES doacoes(id),
      FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
 );
 
+INSERT INTO
+    usuarios (cpf_cnpj, nome, email, senha, tipo)
+VALUES
+    ('111.111.111-11','admin','admin','admin123','admin');
 
-INSERT INTO usuarios(
-    cpf_cnpj,
-    nome,
-    email,
-    senha,
-    tipo
-) VALUES (
-    '111.111.111-11',
-    'admin',
-    'admin',
-    'admin123',
-    'admin'
-);
-
-INSERT INTO Categorias (nome) VALUES ('Grãos e Cereais');
+INSERT INTO
+    categorias (nome)
+VALUES
+    ('Grãos e Cereais');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, nome) VALUES
+INSERT INTO
+    alimentos (id_categoria, nome)
+VALUES
     (@cat_id, 'Arroz'),
     (@cat_id, 'Feijão Preto'),
     (@cat_id, 'Feijão Carioca'),
@@ -78,20 +78,30 @@ INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Fubá'),
     (@cat_id, 'Aveia');
 
-INSERT INTO Categorias (nome) VALUES ('Enlatados e Conservas');
+INSERT INTO
+    categorias (nome)
+VALUES
+    ('Enlatados e Conservas');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, nome) VALUES
+INSERT INTO
+    alimentos (id_categoria, nome)
+VALUES
     (@cat_id, 'Milho em Conserva'),
     (@cat_id, 'Ervilha em Conserva'),
     (@cat_id, 'Molho de Tomate'),
     (@cat_id, 'Atum em Lata'),
     (@cat_id, 'Sardinha em Lata');
 
-INSERT INTO Categorias (nome) VALUES ('Óleos, Temperos e Açúcares');
+INSERT INTO
+    categorias (nome)
+VALUES
+    ('Óleos, Temperos e Açúcares');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, nome) VALUES
+INSERT INTO
+    alimentos (id_categoria, nome)
+VALUES
     (@cat_id, 'Óleo de Soja'),
     (@cat_id, 'Sal Refinado'),
     (@cat_id, 'Açúcar Refinado'),
@@ -101,19 +111,29 @@ INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Leite Condensado'),
     (@cat_id, 'Creme de Leite');
 
-INSERT INTO Categorias (nome) VALUES ('Biscoitos e Pães');
+INSERT INTO
+    categorias (nome)
+VALUES
+    ('Biscoitos e Pães');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, nome) VALUES
+INSERT INTO
+    alimentos (id_categoria, nome)
+VALUES
     (@cat_id, 'Biscoito Cream Cracker'),
     (@cat_id, 'Biscoito Recheado'),
     (@cat_id, 'Pão de Forma'),
     (@cat_id, 'Pão Integral');
 
-INSERT INTO Categorias (nome) VALUES ('Bebidas');
+INSERT INTO
+    categorias (nome)
+VALUES
+    ('Bebidas');
 SET @cat_id = LAST_INSERT_ID();
 
-INSERT INTO Alimentos (id_categoria, nome) VALUES
+INSERT INTO
+    alimentos (id_categoria, nome)
+VALUES
     (@cat_id, 'Leite'),
     (@cat_id, 'Suco em Caixa'),
     (@cat_id, 'Suco em Pó');

@@ -9,7 +9,8 @@ async function excluir(id) {
 }
 
 async function carregarDados() {
-    const resposta = await fetch('../php/doacao/get.php')
+    const idDoador = localStorage.getItem('id');
+    const resposta = await fetch(`../php/doacao/get.php?id-doador=${idDoador}`)
     const retorno = await resposta.json();
     const doacoes = retorno.data;
 

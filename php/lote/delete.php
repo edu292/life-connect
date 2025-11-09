@@ -9,7 +9,7 @@ $retorno = [
 ];
 
 if (isset($_GET['id'])) {
-    $stmt = $conexao->prepare('DELETE FROM lote_doacao WHERE id = ?');
+    $stmt = $conexao->prepare('DELETE FROM lotes_doacao WHERE id = ?');
     $stmt->bind_param('i', $_GET['id']);
     $stmt->execute();
 

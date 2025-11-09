@@ -7,10 +7,10 @@ if (idUsuario) {
 
 formCadastro.addEventListener('submit', (event) => {
     event.preventDefault();
-    cadastro();
-})
+    cadastrar();
+});
 
-async function cadastro() {
+async function cadastrar() {
     const data = new FormData(formCadastro);
     let url = '../php/usuario/save.php';
     if (idUsuario) {
@@ -20,8 +20,6 @@ async function cadastro() {
         method: 'POST',
         body: data
     });
-    const resposta = await retorno.json();
-    console.log(resposta);
     window.location.href = document.referrer;
 }
 
@@ -30,7 +28,6 @@ async function completarFormulario(id) {
     const resposta = await retorno.json();
 
     const usuario = resposta.data[0]
-    console.log(usuario);
     for (const key in usuario) {
         if (formCadastro[key]) {
             formCadastro[key].value = usuario[key];

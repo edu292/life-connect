@@ -16,6 +16,9 @@ async function logar() {
     const resposta = await retorno.json();
     if (resposta.status === 'ok') {
         const usuario = resposta.data;
+        for (const key in usuario) {
+            localStorage.setItem(key, usuario[key]);
+        }
         if (usuario.tipo === 'doador') {
             window.location.href = '../home/doador.html';
         } else if (usuario.tipo === 'receptor') {

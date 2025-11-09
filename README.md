@@ -7,3 +7,5 @@ dessa forma evitamos aquele consolelog chato de erro de JSON.parse. Implementar 
 
 Resumo: Só corrigi o que não estava funcionado 
 #NaoSouDevAinda #SoSeiCorrigir
+
+Parabéns vc sabe ler 🤪

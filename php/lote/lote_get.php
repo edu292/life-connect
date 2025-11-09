@@ -19,7 +19,7 @@ if (isset($_GET['id-doacao'])) {
             l.peso_item,
             l.data_validade
         FROM lote_doacao l
-        INNER JOIN alimento a ON l.id_alimento = a.id
+        INNER JOIN alimentos a ON l.id_alimento = a.id
         WHERE l.id_doacao = ?
     ");
     $stmt->bind_param("i", $id_doacao);

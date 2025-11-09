@@ -6,19 +6,22 @@
     <title>Doador</title>
     <script src="../js/valida_sessao.js"></script>
     <script src="../js/logoff.js" defer></script>
+    <script src="../js/doacao/doacao_read.js" defer></script>
 </head>
 <body>
     <li><button id="botao_logoff">Sair</button></li>
     <li><a href="../doacao/formulario.html">Novo</a></li>
 
-    <thead>
-        <tr>
-            <th>Doação</th>
-            <th>Status</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody id="corpo-tabela">
-    </tbody>
+    <table>
+        <thead>
+            <tr>
+                <th>Doação</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela">
+        </tbody>
+    </table>
 </body>
 </html>

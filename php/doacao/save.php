@@ -9,13 +9,13 @@ $retorno = [
 ];
 
 $titulo = $_POST['titulo'];
-$idDoador = $_POST['id-doador'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $conexao->prepare('UPDATE doacoes SET titulo = ? WHERE id = ?');
     $stmt->bind_param('si', $titulo, $id);
 } else {
+    $idDoador = $_POST['id-doador'];
     $stmt = $conexao->prepare('INSERT INTO doacoes (titulo, id_doador) VALUES (?, ?)');
     $stmt->bind_param("si", $titulo, $idDoador);
 }

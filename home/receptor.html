@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Receptor</title>
+    <script src="../js/validar_sessao.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
     <script src="../js/home_receptor.js" defer></script>
+    <script src="../js/logoff.js" defer></script>
 </head>
 <body>
 
 <main class="container py-4">
-    
+    <div class="mb-3">
+        <a href="#" class="btn btn-secondary" id="logoff">
+            Sair
+        </a>
+    </div>
     <h1 class="mb-4 text-center">Painel de Doações</h1>
     
     <div class="row">
@@ -20,124 +26,13 @@
             <h2 class="h3 mb-3">Ofertas Disponíveis</h2>
             
             <section class="row" id="doacoes-disponiveis-wrapper">
-                
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="border p-3 h-100 d-flex flex-column">
-                        <h3>Doação A</h3>
-                        <ul>
-                            <li>5 tomates</li>
-                            <li>6 camaleões</li>
-                        </ul>
-                        <p class="small text-muted mb-2">
-                            <strong>Endereço:</strong> Rua Fictícia, 10 - Centro
-                        </p>
-                        <div class="row my-3">
-                            <div class="col-6">
-                                <p class="small mb-0">Peso total: <label>75kg</label></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="small mb-0">Qtd Itens: <label>20</label></p>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary w-100 mt-auto">Aceitar</button>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="border p-3 h-100 d-flex flex-column">
-                        <h3>Doação B</h3>
-                        <ul>
-                            <li>10kg Arroz</li>
-                            <li>5kg Feijão</li>
-                        </ul>
-                        <p class="small text-muted mb-2">
-                            <strong>Endereço:</strong> Av. Principal, 250 - Vila Nova
-                        </p>
-                        <div class="row my-3">
-                            <div class="col-6">
-                                <p class="small mb-0">Peso total: <label>15kg</label></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="small mb-0">Qtd Itens: <label>2</label></p>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary w-100 mt-auto">Aceitar</button>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="border p-3 h-100 d-flex flex-column">
-                        <h3>Doação C</h3>
-                        <ul>
-                            <li>3 Casacos</li>
-                            <li>1 Par de botas</li>
-                        </ul>
-                        <p class="small text-muted mb-2">
-                            <strong>Endereço:</strong> Travessa das Flores, 77
-                        </p>
-                        <div class="row my-3">
-                            <div class="col-6">
-                                <p class="small mb-0">Peso total: <label>4kg</label></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="small mb-0">Qtd Itens: <label>4</label></p>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary w-100 mt-auto">Aceitar</button>
-                    </div>
-                </div>
-            
             </section>
         </div>
         
         <div class="col-12 col-lg-6">
             <h2 class="h3 mb-3">Minhas Doações Aceitas</h2>
             
-            <section class="row">
-                
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="border border-success border-2 p-3 h-100 d-flex flex-column">
-                        <h3>Doação D</h3>
-                        <ul>
-                            <li>1 Cadeira de rodas</li>
-                        </ul>
-                        <p class="small text-muted mb-2">
-                            <strong>Endereço:</strong> Rua da Ajuda, 1500 - Bloco B
-                        </p>
-                        <div class="row my-3">
-                            <div class="col-6">
-                                <p class="small mb-0">Peso total: <label>12kg</label></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="small mb-0">Qtd Itens: <label>1</label></p>
-                            </div>
-                        </div>
-                        <button class="btn btn-outline-danger w-100 mt-auto">Cancelar</button>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="border border-success border-2 p-3 h-100 d-flex flex-column">
-                        <h3>Doação E</h3>
-                        <ul>
-                            <li>5L Leite</li>
-                            <li>2 Pacotes Fralda</li>
-                        </ul>
-                        <p class="small text-muted mb-2">
-                            <strong>Endereço:</strong> Rua Fictícia, 10 - Centro
-                        </p>
-                        <div class="row my-3">
-                            <div class="col-6">
-                                <p class="small mb-0">Peso total: <label>7kg</label></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="small mb-0">Qtd Itens: <label>7</label></p>
-                            </div>
-                        </div>
-                        <button class="btn btn-outline-danger w-100 mt-auto">Cancelar</button>
-                    </div>
-                </div>
-            
+            <section class="row"  id="doacoes-aceitas-wrapper">
             </section>
         </div>
     

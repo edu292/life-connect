@@ -10,7 +10,15 @@ $retorno = [
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $stmt = $conexao->prepare(
+        'SELECT
+            *,
+            CONCAT(rua, ", ", numero, " - ", cidade) AS endereco
+        FROM 
+            usuarios
+        WHERE
+            id = ?'
+    );
     $stmt->bind_param("i", $id);
 } else {
     $stmt = $conexao->prepare("SELECT * FROM usuarios");

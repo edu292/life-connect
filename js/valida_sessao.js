@@ -1,7 +1,7 @@
 (async function() {
     const paginasPermitidas = {
         admin: ['/life-connect/home/admin.html', '/life-connect/categorias/index.html', '/life-connect/categorias/formulario.html', '/life-connect/usuarios/index.html', 'life-connect/usuarios/formulario.html'],
-        doador: ['/life-connecthome/doador.html', '/life-connectdoacao/index.html', '/life-connect/doacao/formulario.html'],
+        doador: ['/life-connect/home/doador.html', '/life-connect/doacao/formulario.html'],
         receptor: ['/life-connect/home/receptor.html'],
         motorista: ['/life-connect/home/motorista.html'],
     }

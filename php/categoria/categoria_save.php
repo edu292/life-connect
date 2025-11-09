@@ -1,6 +1,6 @@
 <?php
 global $conexao;
-include_once 'conexao.php';
+include_once '../conexao.php';
 
 $retorno = [
     'status' => '',   // ok ou nok
@@ -23,11 +23,11 @@ $stmt->execute();
 
 if ($stmt->affected_rows == 1) {
     $retorno['status'] = 'ok';
-    $retorno['mensagem'] = 'Categoria atualizada com sucesso';
+    $retorno['mensagem'] = 'Categoria atualizada/inserida com sucesso';
     $retorno['data'] = $conexao->insert_id;
 } else {
     $retorno['status'] = 'nok';
-    $retorno['mensagem'] = 'Não foi possivel atualizar a categoria';
+    $retorno['mensagem'] = 'Não foi possivel atualizar/inserir a categoria';
 }
 
 $stmt->close();

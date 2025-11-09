@@ -10,10 +10,10 @@ $retorno = [
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare("SELECT * FROM categorias WHERE id = ?");
+    $stmt = $conexao->prepare("SELECT * FROM doacao WHERE id = ?");
     $stmt->bind_param("i", $id);
 } else {
-    $stmt = $conexao->prepare("SELECT * FROM categorias");
+    $stmt = $conexao->prepare("SELECT * FROM doacao");
 }
 
 $stmt->execute();

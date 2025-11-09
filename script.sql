@@ -48,6 +48,7 @@ CREATE TABLE lote_doacao (
     FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
 );
 
+
 INSERT INTO usuarios(
     cpf_cnpj,
     nome,
@@ -115,3 +116,27 @@ INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Leite'),
     (@cat_id, 'Suco em Caixa'),
     (@cat_id, 'Suco em Pó');
+
+CREATE TABLE doacao (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    id_entrega INTEGER,
+    nome VARCHAR(50),
+    status ENUM('Aceita', 'Não Aceita') NOT NULL DEFAULT 'Não Aceita',
+    FOREIGN KEY (id_entrega) REFERENCES entrega(id)
+);
+
+ALTER TABLE entrega
+MODIFY COLUMN status ENUM('Pendente', 'Concluída') NOT NULL DEFAULT 'Pendente';
+
+DROP TABLE lote_doacao;
+
+CREATE TABLE lote_doacao (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT, 
+    id_doacao INTEGER NOT NULL, 
+    id_alimento INTEGER NOT NULL,
+    quantidade INTEGER,
+    peso_item DECIMAL(10, 2),
+    data_validade DATE,
+    FOREIGN KEY (id_doacao) REFERENCES doacao(id),
+    FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
+);

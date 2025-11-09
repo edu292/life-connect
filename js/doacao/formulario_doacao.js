@@ -9,9 +9,9 @@ let idDoacao = new URLSearchParams(window.location.search).get('id');
 
 if (idDoacao) {
     completarFormularioDoacao(idDoacao);
-    carregarDados();
-    tabela.style.opacity = '1';
-    formDoacao.style.opacity = '1';
+    //carregarDados(); Como ainda não tem o CRUD de Lotes, essa função não existe no codigo ainda
+    tabela.style.opacity = '1'; // tabela não carrega pois não existe
+    formLote.style.opacity = '1';
 }
 
 formDoacao.addEventListener('submit', (event) => {
@@ -30,11 +30,11 @@ async function salvarDoacao() {
         body: data
     });
     const resposta = await retorno.json();
-    if (!idCategoria) {
-        idCategoria = resposta.data;
-        window.location.href = document.location.href+`?id=${idCategoria}`;
+    if (!idDoacao) {
+        idDoacao = resposta.data;
+        window.location.href = document.location.href+`?id=${idDoacao}`;
     } else {
-        window.location.href = "../categorias/index.html"
+        window.location.href = "../../doacao/formulario.html"
     }
 }
 
@@ -65,7 +65,7 @@ async function completarFormularioDoacao(id) {
     const resposta = await retorno.json();
 
     const doacao = resposta.data[0]
-    for (const key in categoria) {
+    for (const key in doacao) {
         if (formDoacao[key]) {
             formDoacao[key].value = doacao[key];
         }

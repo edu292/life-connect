@@ -21,10 +21,10 @@ async function carregarDados() {
         html += `
             <tr>
                 <td>${categoria.nome}</td>
-                <td>${contador}</td>
-                <td>
-                    <a href="../categoria/formulario.html?id=${categoria.id}">Alterar</a>
-                    <a href="javascript:excluir(${categoria.id})">Excluir</a>
+                <td class="text-center">${contador}</td>
+                <td class="text-center">
+                    <a href="../categoria/formulario.html?id=${categoria.id}" class="btn btn-sm btn-outline-primary me-2">Alterar</a>
+                    <a href="javascript:excluir(${categoria.id})" class="btn btn-sm btn-outline-danger">Excluir</a>
                 </td>
             </tr>
         `

@@ -2,15 +2,15 @@
 global $conexao;
 include '../conexao.php';
 
-$id = $_POST['id'];
+$id = $_GET['id'];
 $status = $_GET['status'];
 
 if ($status == 'disponivel') {
     $stmt = $conexao->prepare(
         'UPDATE 
-            categoria
+            doacoes
         SET 
-            status = "DISPONIVEL",
+            status = "disponivel",
             id_receptor = NULL,
             id_motorista = NULL
         WHERE 
@@ -23,7 +23,7 @@ if ($status == 'disponivel') {
         'UPDATE 
             doacoes
         SET 
-            status = "ACEITA",
+            status = "aceita",
             id_receptor = ?,
             id_motorista = NULL
         WHERE 
@@ -36,7 +36,7 @@ if ($status == 'disponivel') {
         'UPDATE 
             doacoes 
         SET 
-            status = "ACEITA",
+            status = "em transito",
             id_receptor = ?
         WHERE 
             id = ?'
@@ -47,7 +47,7 @@ if ($status == 'disponivel') {
         'UPDATE
             doacoes
         SET
-            status = "CONCLUIDA"
+            status = "concluida"
         WHERE
             id = ?'
     );

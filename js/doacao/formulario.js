@@ -35,10 +35,9 @@ async function salvarDoacao() {
         idDoacao = resposta.data;
         window.location.href = document.location.href+`?id=${idDoacao}`;
     } else {
-        window.location.href = "../doacao/formulario.html"
+        window.location.href = "../home/doador.html"
     }
 }
-
 
 async function carregarAlimentos() {
     const url = '../php/alimento/get.php';

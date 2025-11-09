@@ -1,36 +1,32 @@
 <?php
-include $conexao;
+include_once('../conexao.php');
 
 $retorno = [
     'status' => '', 
     'mensagem' => '',
     'data' => []
 ];
-    $id_lote = '';
-    $id_entrega = '';
-    $id_alimento = '';
-    $quantidade = $_POST['quantidade'];
-    $peso_item = $_POST['peso'];
-    $data_validade = $_POST['validade'];
+
+
+$nome = $_POST['nome-doacao'];
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE lote_doacao');
+    $stmt = $conexao->prepare('UPDATE doacao SET nome = ? WHERE id = ?');
     $stmt->bind_param('si', $nome, $id);
 } else {
-    $stmt = $conexao->prepare('INSERT INTO lote_doacao');
+    $stmt = $conexao->prepare('INSERT INTO categorias (nome, ) VALUES (?)');
     $stmt->bind_param("s", $nome);
 }
 
-$stmt->execute();
-
 if ($stmt->affected_rows == 1) {
     $retorno['status'] = 'ok';
-    $retorno['mensagem'] = 'Categoria atualizada com sucesso!';
+    $retorno['mensagem'] = 'Doação atualizada/inserida com sucesso';
     $retorno['data'] = $conexao->insert_id;
 } else {
     $retorno['status'] = 'nok';
-    $retorno['mensagem'] = 'Não foi possivel atualizar a categoria.';
+    $retorno['mensagem'] = 'Não foi possivel atualizar/inserir a doação';
 }
 
 $stmt->close();

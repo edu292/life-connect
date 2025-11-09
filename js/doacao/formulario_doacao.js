@@ -5,12 +5,13 @@ const corpoTabela = document.getElementById('corpo-tabela');
 const botaoVoltar = document.getElementById('botao_voltar');
 const selectAlimento = document.getElementById('id_alimento'); 
 let idDoacao = new URLSearchParams(window.location.search).get('id');
+let idLote = null;
 
 
 if (idDoacao) {
     completarFormularioDoacao(idDoacao);
-    //carregarDados(); Como ainda não tem o CRUD de Lotes, essa função não existe no codigo ainda
-    tabela.style.opacity = '1'; // tabela não carrega pois não existe
+    carregarDados();
+    tabela.style.opacity = '1'; 
     formLote.style.opacity = '1';
 }
 
@@ -72,7 +73,7 @@ async function completarFormularioDoacao(id) {
     }
 }
 
-botao_voltar.addEventListener("click", () => {
+botaoVoltar.addEventListener("click", () => {
     window.location.href = '../doacao/index.html';
 });
 
@@ -80,3 +81,72 @@ botao_voltar.addEventListener("click", () => {
 //LOTES DE DOAÇÃO//
 //--------------------------------------------------------------------------------------------//
 
+async function carregarDados() {
+    const retorno = await fetch(`../php/lote/lote_get.php?id-doacao=${idDoacao}`);
+    const resposta = await retorno.json();
+    if (resposta.status === "ok") {
+        const lotes = resposta.data;
+        let html = '';
+        for (let lote of lotes) {
+            html += `<tr>
+                        <td>${lote.nome_alimento}</td>
+                        <td>${lote.quantidade}</td>
+                        <td>${lote.peso_item}</td>
+                        <td>${lote.data_validade}</td>
+                        <td>
+                            <a class="btn btn-secondary btn-sm" href = '#' onclick = 'completarFormularioLote(${lote.id})'>Alterar</a>
+                            <a class="btn btn-danger btn-sm" href = '#' onclick = 'excluir(${lote.id})'>Excluir</a>
+                        </td>
+                    </tr>`;
+        }
+        corpoTabela.innerHTML += html
+    }
+}
+
+async function excluir(idLote) {
+    const retorno = await fetch("../php/lote/lote_delete.php?id="+idLote);
+    const resposta = await retorno.json();
+    if(resposta.status === "ok"){
+        window.location.reload();
+    }else{
+        alert("ERRO:" + resposta.mensagem);
+    }
+}
+
+
+async function salvarLote() {
+    const data = new FormData(formLote);
+    let url = '../php/lote/lote_save.php';
+    if (idLote) {
+        url += `?id=${idLote}`;
+    }
+    else{
+        url += `?idDoacao=${idDoacao}`;
+    }
+    const retorno = await fetch(url, {
+        method: 'POST',
+        body: data
+    });
+    const resposta = await retorno.json();
+    console.log(resposta);
+    window.location.reload()
+}
+
+
+async function completarFormularioLote(id) {
+    idLote = id;
+    const retorno = await fetch(`../php/lote/lote_get.php?id=${id}`);
+    const resposta = await retorno.json();
+
+    const lote = resposta.data[0]
+    for (const key in lote) {
+        if (formLote[key]) {
+            formLote[key].value = lote[key];
+        }
+    }
+}
+
+formLote.addEventListener("submit", (event) => {
+    event.preventDefault();
+    salvarLote();
+});

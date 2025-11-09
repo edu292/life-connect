@@ -1,29 +1,8 @@
 const tabela = document.getElementById('tabela');
 carregarDados();
 
-const botao_voltar = document.getElementById("botao_voltar").addEventListener("click",() => {
-    window.location.href = "../home/admin.html"
-})
-
-document.getElementById("novo").addEventListener("click", () =>{
-    window.location.href = '../usuarios/formulario.html'
-})
-document.getElementById("logoff").addEventListener("click", () =>{
-    logoff();
-});
-
-async function logoff() {
-    const retorno = await fetch ("../php/logoff.php")
-    const resposta = await retorno.json();
-    if(resposta.status === "ok"){
-        window.location.href = '../login/';
-    }else{
-        alert("falha ao efetuar logoff")
-    }
-}
-
 async function carregarDados() {
-    const retorno = await fetch("../php/usuario/usuario_get.php");
+    const retorno = await fetch("../php/usuario/get.php");
     const resposta = await retorno.json();
     if (resposta.status === "ok") {
         const usuarios = resposta.data;
@@ -36,7 +15,7 @@ async function carregarDados() {
                         <td>${usuario.senha}</td>
                         <td>${usuario.tipo}</td>
                         <td>
-                            <a class="btn btn-secondary btn-sm" href = '../usuarios/formulario.html?id=${usuario.id}'>Alterar</a>
+                            <a class="btn btn-secondary btn-sm" href = '../usuario/formulario.html?id=${usuario.id}'>Alterar</a>
                             <a class="btn btn-danger btn-sm" href = '#' onclick = 'excluir(${usuario.id})'>Excluir</a>
                         </td>
                     </tr>`;
@@ -48,7 +27,7 @@ async function carregarDados() {
 }
 
 async function excluir(id) {
-    const retorno = await fetch("../php/usuario/usuario_delete.php?id="+id);
+    const retorno = await fetch("../php/usuario/delete.php?id="+id);
     const resposta = await retorno.json();
     if(resposta.status === "ok"){
         window.location.reload();

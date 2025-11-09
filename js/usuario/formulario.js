@@ -1,7 +1,3 @@
-const botao_voltar = document.getElementById("botao_voltar").addEventListener("click",() => {
-    window.location.href = document.referrer;
-})
-
 const formCadastro = document.getElementById('cadastro');
 const idUsuario = new URLSearchParams(window.location.search).get('id');
 
@@ -16,7 +12,7 @@ formCadastro.addEventListener('submit', (event) => {
 
 async function cadastro() {
     const data = new FormData(formCadastro);
-    let url = '../php/usuario/usuario_save.php';
+    let url = '../php/usuario/save.php';
     if (idUsuario) {
         url += `?id=${idUsuario}`;
     }
@@ -30,7 +26,7 @@ async function cadastro() {
 }
 
 async function completarFormulario(id) {
-    const retorno = await fetch(`../php/usuario/usuario_get.php?id=${id}`);
+    const retorno = await fetch(`../php/usuario/get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const usuario = resposta.data[0]

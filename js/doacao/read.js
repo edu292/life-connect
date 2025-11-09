@@ -1,5 +1,5 @@
 async function excluir(id) {
-    const resposta = await fetch(`../php/doacao/doacao_delete.php?id=${id}`);
+    const resposta = await fetch(`../php/doacao/delete.php?id=${id}`);
     const retorno = await resposta.json();
     if (retorno.status === 'ok') {
         window.location.reload();
@@ -9,7 +9,7 @@ async function excluir(id) {
 }
 
 async function carregarDados() {
-    const resposta = await fetch('../php/doacao/doacao_get.php')
+    const resposta = await fetch('../php/doacao/get.php')
     const retorno = await resposta.json();
     const doacoes = retorno.data;
 
@@ -17,7 +17,7 @@ async function carregarDados() {
     for (const doacao of doacoes) {
         html += `
             <tr>
-                <td>${doacao.nome}</td>
+                <td>${doacao.titulo}</td>
                 <td>${doacao.status}</td>
                 <td>
                     <a href="../doacao/formulario.html?id=${doacao.id}">Alterar</a>
@@ -31,4 +31,3 @@ async function carregarDados() {
 
 const tabela = document.getElementById('tabela');
 carregarDados();
-

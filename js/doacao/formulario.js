@@ -2,8 +2,6 @@ const formDoacao = document.getElementById('formulario-doacao');
 const formLote = document.getElementById('formulario-lote');
 const tabela = document.getElementById('tabela');
 const corpoTabela = document.getElementById('corpo-tabela');
-const botaoVoltar = document.getElementById('botao_voltar');
-const selectAlimento = document.getElementById('id_alimento'); 
 let idDoacao = new URLSearchParams(window.location.search).get('id');
 let idLote = null;
 
@@ -22,7 +20,7 @@ formDoacao.addEventListener('submit', (event) => {
 
 async function salvarDoacao() {
     const data = new FormData(formDoacao);
-    let url = '../php/doacao/doacao_save.php'
+    let url = '../php/doacao/save.php'
     if (idDoacao) {
         url += `?id=${idDoacao}`;
     }
@@ -35,13 +33,13 @@ async function salvarDoacao() {
         idDoacao = resposta.data;
         window.location.href = document.location.href+`?id=${idDoacao}`;
     } else {
-        window.location.href = "../../doacao/formulario.html"
+        window.location.href = "../doacao/formulario.html"
     }
 }
 
 
 async function carregarAlimentos() {
-    const url = '../php/alimento/alimento_get.php'; 
+    const url = '../php/alimento/get.php';
     const retorno = await fetch(url);
     const resposta = await retorno.json();
     let opcoes = '<option value="" disabled selected>-- Selecione um Alimento --</option>';
@@ -52,17 +50,15 @@ async function carregarAlimentos() {
                 <option value="${alimento.id}">${alimento.nome}</option>
             `;
         });
-    } else {
-        opcoes = '<option value="" disabled selected>Nenhum alimento encontrado</option>';
     }
 
-    selectAlimento.innerHTML = opcoes;
+    formLote.id_alimento.innerHTML = opcoes;
 }
 carregarAlimentos(); 
 
 
 async function completarFormularioDoacao(id) {
-    const retorno = await fetch(`../php/doacao/doacao_get.php?id=${id}`);
+    const retorno = await fetch(`../php/doacao/get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const doacao = resposta.data[0]
@@ -73,16 +69,11 @@ async function completarFormularioDoacao(id) {
     }
 }
 
-botaoVoltar.addEventListener("click", () => {
-    window.location.href = '../doacao/index.html';
-});
-
-
 //LOTES DE DOAÇÃO//
 //--------------------------------------------------------------------------------------------//
 
 async function carregarDados() {
-    const retorno = await fetch(`../php/lote/lote_get.php?id-doacao=${idDoacao}`);
+    const retorno = await fetch(`../php/lote/get.php?id-doacao=${idDoacao}`);
     const resposta = await retorno.json();
     if (resposta.status === "ok") {
         const lotes = resposta.data;
@@ -91,7 +82,7 @@ async function carregarDados() {
             html += `<tr>
                         <td>${lote.nome_alimento}</td>
                         <td>${lote.quantidade}</td>
-                        <td>${lote.peso_item}</td>
+                        <td>${lote.peso_total}</td>
                         <td>${lote.data_validade}</td>
                         <td>
                             <a class="btn btn-secondary btn-sm" href = '#' onclick = 'completarFormularioLote(${lote.id})'>Alterar</a>
@@ -104,7 +95,7 @@ async function carregarDados() {
 }
 
 async function excluir(idLote) {
-    const retorno = await fetch("../php/lote/lote_delete.php?id="+idLote);
+    const retorno = await fetch("../php/lote/delete.php?id="+idLote);
     const resposta = await retorno.json();
     if(resposta.status === "ok"){
         window.location.reload();
@@ -116,12 +107,12 @@ async function excluir(idLote) {
 
 async function salvarLote() {
     const data = new FormData(formLote);
-    let url = '../php/lote/lote_save.php';
+    let url = '../php/lote/save.php';
     if (idLote) {
         url += `?id=${idLote}`;
     }
     else{
-        url += `?idDoacao=${idDoacao}`;
+        url += `?id-doacao=${idDoacao}`;
     }
     const retorno = await fetch(url, {
         method: 'POST',
@@ -135,7 +126,7 @@ async function salvarLote() {
 
 async function completarFormularioLote(id) {
     idLote = id;
-    const retorno = await fetch(`../php/lote/lote_get.php?id=${id}`);
+    const retorno = await fetch(`../php/lote/get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const lote = resposta.data[0]

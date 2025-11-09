@@ -30,22 +30,23 @@ CREATE TABLE alimentos (
     FOREIGN KEY (id_categoria) REFERENCES categorias(id)
 );
 
-CREATE TABLE entrega (
+CREATE TABLE doacao (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100),
     descricao VARCHAR(100),
     data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(100)
+    status ENUM('DISPONIVEL', 'ACEITA', 'EM TRANSITO', 'COUNCLUIDA') NOT NULL DEFAULT 'DISPONIVEL',
 );
 
 CREATE TABLE lote_doacao (
-    id_entrega INTEGER,
-    id_alimento INTEGER,
-    quantidade INTEGER,
-    peso_item DECIMAL(10, 2),
-    data_validade DATE,
-    FOREIGN KEY (id_entrega) REFERENCES entrega(id),
-    FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
+     id INTEGER PRIMARY KEY AUTO_INCREMENT,
+     id_doacao INTEGER NOT NULL,
+     id_alimento INTEGER NOT NULL,
+     quantidade INTEGER,
+     peso_unidade DECIMAL(10, 2),
+     data_validade DATE,
+     FOREIGN KEY (id_doacao) REFERENCES doacao(id),
+     FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
 );
 
 
@@ -116,27 +117,3 @@ INSERT INTO Alimentos (id_categoria, nome) VALUES
     (@cat_id, 'Leite'),
     (@cat_id, 'Suco em Caixa'),
     (@cat_id, 'Suco em Pó');
-
-CREATE TABLE doacao (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    id_entrega INTEGER,
-    nome VARCHAR(50),
-    status ENUM('Aceita', 'Não Aceita') NOT NULL DEFAULT 'Não Aceita',
-    FOREIGN KEY (id_entrega) REFERENCES entrega(id)
-);
-
-ALTER TABLE entrega
-MODIFY COLUMN status ENUM('Pendente', 'Concluída') NOT NULL DEFAULT 'Pendente';
-
-DROP TABLE lote_doacao;
-
-CREATE TABLE lote_doacao (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT, 
-    id_doacao INTEGER NOT NULL, 
-    id_alimento INTEGER NOT NULL,
-    quantidade INTEGER,
-    peso_item DECIMAL(10, 2),
-    data_validade DATE,
-    FOREIGN KEY (id_doacao) REFERENCES doacao(id),
-    FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
-);

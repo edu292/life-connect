@@ -8,15 +8,15 @@ $retorno = [
     'data' => []      // efetivamente o retorno
 ];
 
-$nome = $_POST['nome'];
+$titulo = $_POST['titulo'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE doacao SET nome = ? WHERE id = ?');
-    $stmt->bind_param('si', $nome, $id);
+    $stmt = $conexao->prepare('UPDATE doacao SET titulo = ? WHERE id = ?');
+    $stmt->bind_param('si', $titulo, $id);
 } else {
-    $stmt = $conexao->prepare('INSERT INTO doacao (nome) VALUES (?)');
-    $stmt->bind_param("s", $nome);
+    $stmt = $conexao->prepare('INSERT INTO doacao (titulo) VALUES (?)');
+    $stmt->bind_param("s", $titulo);
 }
 
 $stmt->execute();

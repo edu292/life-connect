@@ -13,7 +13,7 @@ async function executarLogoff() {
 }
 
 // 3. Anexa a função ao botão
-const botaoLogoff = document.getElementById('botao_logoff');
+const botaoLogoff = document.getElementById('logoff');
 
 botaoLogoff.addEventListener('click', (event) => {
     event.preventDefault();

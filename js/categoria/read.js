@@ -1,5 +1,5 @@
 async function excluir(id) {
-    const resposta = await fetch(`../php/categoria/categoria_delete.php?id=${id}`);
+    const resposta = await fetch(`../php/categoria/delete.php?id=${id}`);
     const retorno = await resposta.json();
     if (retorno.status === 'ok') {
         window.location.reload();
@@ -9,13 +9,13 @@ async function excluir(id) {
 }
 
 async function carregarDados() {
-    const resposta = await fetch('../php/categoria/categoria_get.php')
+    const resposta = await fetch('../php/categoria/get.php')
     const retorno = await resposta.json();
     const categorias = retorno.data
 
     let html = ''
     for (const categoria of categorias) {
-        const contadorResposta = await fetch(`../php/alimento/alimento_get.php?id-categoria=${categoria.id}&contar=true`);
+        const contadorResposta = await fetch(`../php/alimento/get.php?id-categoria=${categoria.id}&contar=true`);
         const contadorRetorno = await contadorResposta.json();
         const contador = contadorRetorno.data[0].quantidade;
         html += `
@@ -23,7 +23,7 @@ async function carregarDados() {
                 <td>${categoria.nome}</td>
                 <td>${contador}</td>
                 <td>
-                    <a href="../categorias/formulario.html?id=${categoria.id}">Alterar</a>
+                    <a href="../categoria/formulario.html?id=${categoria.id}">Alterar</a>
                     <a href="javascript:excluir(${categoria.id})">Excluir</a>
                 </td>
             </tr>

@@ -21,7 +21,7 @@ formCategoria.addEventListener('submit', (event) => {
 
 async function salvarCategoria() {
     const data = new FormData(formCategoria);
-    let url = '../php/categoria/categoria_save.php'
+    let url = '../php/categoria/save.php'
     if (idCategoria) {
         url += `?id=${idCategoria}`;
     }
@@ -34,12 +34,12 @@ async function salvarCategoria() {
         idCategoria = resposta.data;
         window.location.href = document.location.href+`?id=${idCategoria}`;
     } else {
-        window.location.href = "../categorias/index.html"
+        window.location.href = "../categoria/index.html"
     }
 }
 
 async function completarFormularioCategoria(id) {
-    const retorno = await fetch(`../php/categoria/categoria_get.php?id=${id}`);
+    const retorno = await fetch(`../php/categoria/get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const categoria = resposta.data[0]
@@ -51,14 +51,14 @@ async function completarFormularioCategoria(id) {
 }
 
 botao_voltar.addEventListener("click", () => {
-    window.location.href = '../categorias/index.html';
+    window.location.href = '../categoria/index.html';
 });
 
 //ALIMENTOS//
 //--------------------------------------------------------------------------------------------//
 
 async function carregarDados() {
-    const retorno = await fetch(`../php/alimento/alimento_get.php?id-categoria=${idCategoria}`);
+    const retorno = await fetch(`../php/alimento/get.php?id-categoria=${idCategoria}`);
     const resposta = await retorno.json();
     if (resposta.status === "ok") {
         const alimentos = resposta.data;
@@ -77,7 +77,7 @@ async function carregarDados() {
 }
 
 async function excluir(idAlimento) {
-    const retorno = await fetch("../php/alimento/alimento_delete.php?id="+idAlimento);
+    const retorno = await fetch("../php/alimento/delete.php?id="+idAlimento);
     const resposta = await retorno.json();
     if(resposta.status === "ok"){
         window.location.reload();
@@ -89,7 +89,7 @@ async function excluir(idAlimento) {
 
 async function salvarAlimento() {
     const data = new FormData(formAlimento);
-    let url = '../php/alimento/alimento_save.php';
+    let url = '../php/alimento/save.php';
     if (idAlimento) {
         url += `?id=${idAlimento}`;
     }
@@ -108,7 +108,7 @@ async function salvarAlimento() {
 
 async function completarFormularioAlimento(id) {
     idAlimento = id;
-    const retorno = await fetch(`../php/alimento/alimento_get.php?id=${id}`);
+    const retorno = await fetch(`../php/alimento/get.php?id=${id}`);
     const resposta = await retorno.json();
 
     const alimento = resposta.data[0]
@@ -123,4 +123,8 @@ formAlimento.addEventListener("submit", (event) => {
     event.preventDefault();
     salvarAlimento();
     window.location.reload()
+});
+
+formAlimento.addEventListener("reset", () => {
+    idAlimento = null;
 });

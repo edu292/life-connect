@@ -16,8 +16,9 @@ if (isset($_GET['id-doacao'])) {
             l.id_alimento,
             a.nome AS nome_alimento,
             l.quantidade,
-            l.peso_item,
-            l.data_validade
+            l.peso_unidade,
+            l.data_validade,
+            l.peso_unidade * l.quantidade AS peso_total
         FROM lote_doacao l
         INNER JOIN alimentos a ON l.id_alimento = a.id
         WHERE l.id_doacao = ?

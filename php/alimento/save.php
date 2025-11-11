@@ -9,13 +9,13 @@ $retorno = [
 ];
 
 $nome = $_POST['nome'];
-$idCategoria = $_GET['idCategoria'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $conexao->prepare('UPDATE alimentos SET nome = ? WHERE id = ?');
     $stmt->bind_param('si', $nome, $id);
 } else {
+    $idCategoria = $_GET['id-categoria'];
     $stmt = $conexao->prepare('INSERT INTO alimentos (nome, id_categoria) VALUES (?, ?)');
     $stmt->bind_param("si", $nome, $idCategoria);
 }

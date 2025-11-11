@@ -94,7 +94,7 @@ async function salvarAlimento() {
         url += `?id=${idAlimento}`;
     }
     else{
-        url += `?idCategoria=${idCategoria}`;
+        url += `?id-categoria=${idCategoria}`;
     }
     const retorno = await fetch(url, {
         method: 'POST',

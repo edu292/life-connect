@@ -55,11 +55,6 @@ CREATE TABLE lotes_doacao (
 );
 
 INSERT INTO
-    usuarios (cpf_cnpj, nome, email, senha, tipo)
-VALUES
-    ('111.111.111-11','admin','admin','admin123','admin');
-
-INSERT INTO
     categorias (nome)
 VALUES
     ('Grãos e Cereais');
@@ -137,3 +132,23 @@ VALUES
     (@cat_id, 'Leite'),
     (@cat_id, 'Suco em Caixa'),
     (@cat_id, 'Suco em Pó');
+
+INSERT INTO
+    usuarios (cpf_cnpj, nome, email, senha, tipo)
+VALUES
+    ('111.111.111-11','admin','admin','admin123','admin');
+    
+INSERT INTO
+    usuarios (cpf_cnpj, nome, email, senha, tipo, rua, numero, bairro, cidade, estado, cep)
+VALUES
+    ('222.222.222-22','doador','doador','doador123','doador','Rua do doador',22,'bairro do doador','cidade do doador','estado do doador','22222-222');
+
+INSERT INTO
+    usuarios (cpf_cnpj, nome, email, senha, tipo, rua, numero, bairro, cidade, estado, cep)
+VALUES
+    ('333.333.333-33','receptor','receptor','receptor123','receptor','Rua do receptor',33,'bairro do receptor','cidade do receptor','estado do receptor','33333-333');
+
+INSERT INTO
+    usuarios (cpf_cnpj, nome, email, senha, tipo, rua, numero, bairro, cidade, estado, cep)
+VALUES
+    ('444.444.444-44','motorista','motorista','motorista123','motorista','Rua do motorista',44,'bairro do motorista','cidade do motorista','estado do motorista','44444-444');

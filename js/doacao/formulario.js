@@ -86,8 +86,8 @@ async function carregarDados() {
                         <td>${lote.peso_total}</td>
                         <td>${lote.data_validade}</td>
                         <td>
-                            <a class="btn btn-secondary btn-sm" href = '#' onclick = 'completarFormularioLote(${lote.id})'>Alterar</a>
-                            <a class="btn btn-danger btn-sm" href = '#' onclick = 'excluir(${lote.id})'>Excluir</a>
+                            <a class="btn btn-secondary btn-sm" href='javascript:completarFormularioLote(${lote.id})'>Alterar</a>
+                            <a class="btn btn-danger btn-sm" href='javascript:excluir(${lote.id})'>Excluir</a>
                         </td>
                     </tr>`;
         }
@@ -141,4 +141,8 @@ async function completarFormularioLote(id) {
 formLote.addEventListener("submit", (event) => {
     event.preventDefault();
     salvarLote();
+});
+
+formLote.addEventListener('reset', () => {
+    idLote = null;
 });

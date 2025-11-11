@@ -43,6 +43,35 @@ CREATE TABLE doacoes (
     FOREIGN KEY (id_motorista) REFERENCES usuarios(id)
 );
 
+DELIMITER $$
+CREATE TRIGGER before_delete_usuarios
+BEFORE DELETE ON usuarios
+FOR EACH ROW
+BEGIN
+    DELETE FROM
+        doacoes
+    WHERE
+        id_doador = OLD.id;
+
+    UPDATE
+        doacoes
+    SET
+        id_receptor = NULL,
+        status = IF(status = 'aceita', 'disponivel', status)
+    WHERE
+        id_receptor = OLD.id;
+
+    UPDATE
+        doacoes
+    SET
+        id_motorista = NULL,
+        status = IF(status = 'em transito', 'aceita', status)
+    WHERE
+        id_motorista = OLD.id;
+END;
+$$
+DELIMITER ;
+
 CREATE TABLE lotes_doacao (
      id INTEGER PRIMARY KEY AUTO_INCREMENT,
      id_doacao INTEGER NOT NULL,
@@ -50,8 +79,8 @@ CREATE TABLE lotes_doacao (
      quantidade INTEGER,
      peso_unidade DECIMAL(10, 2),
      data_validade DATE,
-     FOREIGN KEY (id_doacao) REFERENCES doacoes(id),
-     FOREIGN KEY (id_alimento) REFERENCES alimentos(id)
+     FOREIGN KEY (id_doacao) REFERENCES doacoes(id) ON DELETE CASCADE,
+     FOREIGN KEY (id_alimento) REFERENCES alimentos(id) ON DELETE CASCADE
 );
 
 INSERT INTO

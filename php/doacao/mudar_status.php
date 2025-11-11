@@ -4,6 +4,7 @@ include '../conexao.php';
 
 $id = $_GET['id'];
 $status = $_GET['status'];
+$status = str_replace('-', ' ', $status);
 
 if ($status == 'disponivel') {
     $stmt = $conexao->prepare(
@@ -30,14 +31,14 @@ if ($status == 'disponivel') {
             id = ?'
     );
     $stmt->bind_param('ii', $idReceptor, $id);
-} elseif ($status == 'em-transito') {
+} elseif ($status == 'em transito') {
     $idMotorista = $_GET['id-motorista'];
     $stmt = $conexao->prepare(
         'UPDATE 
             doacoes 
         SET 
             status = "em transito",
-            id_receptor = ?
+            id_motorista = ?
         WHERE 
             id = ?'
     );

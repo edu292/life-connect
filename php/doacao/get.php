@@ -12,10 +12,6 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $conexao->prepare('SELECT * FROM doacoes WHERE id = ?');
     $stmt->bind_param('i', $id);
-} elseif (isset($_GET['status'])) {
-    $status = $_GET['status'];
-    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE status = ?");
-    $stmt->bind_param('s', $status);
 } elseif (isset($_GET['id-doador'])) {
     $idDoador = $_GET['id-doador'];
     $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE id_doador = ?");
@@ -26,8 +22,21 @@ if (isset($_GET['id'])) {
     $stmt->bind_param('i', $idReceptor);
 } elseif (isset($_GET['id-motorista'])) {
     $idMotorista = $_GET['id-motorista'];
-    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE id_motorista = ?");
-    $stmt->bind_param('i', $idMotorista);
+    $query = 'SELECT * FROM doacoes WHERE id_motorista = ?';
+    if (isset($_GET['status'])) {
+        $status = $_GET['status'];
+        $status = str_replace('-', ' ', $status);
+        $query .= ' AND status = ?';
+        $stmt = $conexao->prepare($query);
+        $stmt->bind_param('is', $idMotorista, $status);
+    } else {
+        $stmt = $conexao->prepare($query);
+        $stmt->bind_param('i', $idMotorista);
+    }
+}  elseif (isset($_GET['status'])) {
+    $status = $_GET['status'];
+    $stmt = $conexao->prepare("SELECT * FROM doacoes WHERE status = ?");
+    $stmt->bind_param('s', $status);
 } else {
     $stmt = $conexao->prepare("SELECT * FROM doacoes");
 }

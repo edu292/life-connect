@@ -122,7 +122,6 @@ async function completarFormularioAlimento(id) {
 formAlimento.addEventListener("submit", (event) => {
     event.preventDefault();
     salvarAlimento();
-    window.location.reload()
 });
 
 formAlimento.addEventListener("reset", () => {

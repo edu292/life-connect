@@ -14,13 +14,13 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 
 if ($resultado->num_rows == 1) {
-    $usuario = $resultado->fetch_assoc();
+    $usuario = $resultado->fetch_assoc(); //le a linha retornada como um array associativo
     $retorno['status'] = 'ok';
     $retorno['mensagem'] = 'Registro encontrado';
     $retorno['data'] = $usuario;
     session_start();
     $_SESSION['usuario'] = $usuario;
-} else {
+} else {    
     $retorno['status'] = 'nok';
     $retorno['mensagem'] = 'Nenhum registro encontrado';
     $retorno['data'] = [];
@@ -30,4 +30,4 @@ $stmt->close();
 $conexao->close();
 
 header('Content-type: application/json;charset=utf-8');
-echo json_encode($retorno);
+echo json_encode($retorno); // converte pra json

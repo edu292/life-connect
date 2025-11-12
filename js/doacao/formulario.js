@@ -81,7 +81,7 @@ async function carregarDados() {
         let html = '';
         for (let lote of lotes) {
             html += `<tr>
-                        <td>${lote.nome_alimento}</td>
+                        <td>${lote.nome}</td>
                         <td>${lote.quantidade}</td>
                         <td>${lote.peso_total}</td>
                         <td>${lote.data_validade}</td>

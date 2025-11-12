@@ -6,7 +6,7 @@ $retorno = [
 ];
 
 session_start();
-if (isset($_SESSION['usuario'])) {
+if (isset($_SESSION['usuario'])) { //se a variável usuario existir (vindo do login)
     $retorno['status'] = 'ok';
     $retorno['data'] = $_SESSION['usuario'];
 } else {

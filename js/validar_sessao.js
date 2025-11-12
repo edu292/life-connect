@@ -17,7 +17,7 @@
     const path = window.location.pathname.split('/').slice(2).join('/'); //window.location.pathname é a url
     //split() transforma uma string em um array, cortando nos pontos onde tem /
 
-    if (!paginasPermitidas[retorno.data.tipo].includes(path)) { //verifica se a pagina atual está no array de pags permitidas para o tipo de usuário retornado pelo servidor 
+    if (!paginasPermitidas[retorno.data.tipo].includes(path)) { //verifica se a pagina atual está no array de pags permitidas para o tipo de usuário retornado pelo servidor(no data) 
         document.location.href = '../login/index.html'; //Se a pagina nao estiver permitida para o tipo do usuário, manda para o login
     }
 })();

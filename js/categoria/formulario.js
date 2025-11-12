@@ -7,7 +7,7 @@ let idAlimento = null;
 const botao_voltar = document.getElementById("botao_voltar")
 
     
-if (idCategoria) {
+if (idCategoria) { //se existe id na url
     completarFormularioCategoria(idCategoria);
     carregarDados();
     tabela.style.opacity = '1';

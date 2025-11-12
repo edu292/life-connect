@@ -1,0 +1,43 @@
+Adicionar Instagram ao CRUD USUÁRIOS
+Passo 1: Criar uma coluna VARCHAR no mysql com o comando ALTER TABLE _tabela-em-questão_ ADD COLUMN _Nome-Coluna tipo de coluna_
+Passo 2: Criar um campo text no formulário html em questão:
+(marcação HTML estara comentado no codigo formulario.html do usuario)
+Passo 3: Criar uma nova THEAD no index.html do usuário com o nome da nova tabela
+Passo 4: Na linha 17 do arquivo js/usuario/read.js adicionar a TD ${usuario.instagram}
+Passo 5: Declarar a variavel php que vem do js por POST ($instagram = $_POST['instagram'];)
+Passo 6: Colocar a variavel instagram no Prepare e bind param. SÃO 2 PREPARES E 2 BIND PARAM
+Passo 7: Lembrar de adicionar a letra que definira o tipo de variavel que entra nas linhas 45 e 79
+
+Adicionar campo de Texto nos LOTES e ALIMENTOS
+Passo 1: Criar uma coluna VARCHAR no mysql com o comando ALTER TABLE _tabela-em-questão_ ADD COLUMN _Nome-Coluna tipo de coluna_
+Passo 2: Injetar o seguinte texto HTML no formulário de ID formulario-alimento ou formulario-lote:
+ <div class="mb-3">
+        <label for="instagram" class="form-label">Instagram: </label>
+        <input type="text" id="instagram" name="instagram" class="form-control" placeholder="Instagram">
+</div>
+Passo 3: Colocar uma nova THEAD no mesmo html do formulário.
+Passo 4: Adicionar a TD em js/categoria/formulario.js <td>${alimento.instagram}</td> na linha 69
+Passo 5: Declarar a variavel php que vem do js por POST ($instagram = $_POST['instagram'];) no php/alimento/save.php
+Passo 6: Colocar a variavel instagram no Prepare e bind param. SÃO 2 PREPARES E 2 BIND PARAM
+Passo 7: Lembrar de adicionar a letra que definira o tipo de variavel que entra nas linhas 17 e 21.
+
+
+
+Considerações para caso o professor peça DOACAO OU CATEGORIA:
+Esses cruds devem ter tratamento diferente pois a função READ aparece em dois arquivos diferentes. a lista de categorias é
+exibida em categoria/index.html enquanto a de doação fica em doacao/formulario.html
+Se você estiver manipulando o lote doações, lembre-se de colocar um elemento a mais no get.php a partir da linha 14 referenciando seu novo campo.
+
+
+Adicionar campo de texto na DOACAO e CATEGORIA
+Passo 1: Criar uma coluna VARCHAR no mysql com o comando ALTER TABLE _tabela-em-questão_ ADD COLUMN _Nome-Coluna tipo de coluna_
+Passo 2: Injetar o seguinte texto HTML no formulário de ID formulario-doacao ou formulario-categoria:
+<div class="mb-3">
+    <label for="instagram" class="form-label">instagram:</label>
+    <input type="text" name="instagram" id="instagram" class="form-control" placeholder="instagram">
+</div>
+Passo 3: Colocar uma nova THEAD no  html do doador (home/doador.html) SE e SOMENTE SE for doação. Se for categoria, inserir uma nova THEAD em categoria/index.html
+Passo 4: Adicionar a TD em js/categoria/formulario.js <td>${alimento.instagram}</td> na linha 69
+Passo 5: Declarar a variavel php que vem do js por POST ($instagram = $_POST['instagram'];)
+Passo 6: Colocar a variavel instagram no Prepare e bind param. SÃO 2 PREPARES E 2 BIND PARAM
+Passo 7: Lembrar de adicionar a letra que definira o tipo de variavel.

@@ -19,6 +19,7 @@ $estado = $_POST['estado'];
 $cidade = $_POST['cidade'];
 $cep = $_POST['cep'];
 $tipo = $_POST['tipo'];
+$instagram = $_POST['instagram'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -35,7 +36,8 @@ if (isset($_GET['id'])) {
             cidade = ?, 
             estado = ?, 
             cep = ?, 
-            tipo = ?
+            tipo = ?,
+            instagram = ?
         WHERE id = ?'
     );
 
@@ -52,6 +54,7 @@ if (isset($_GET['id'])) {
         $estado,
         $cep,
         $tipo,
+        $instagram,
         $id
     );
 } else {
@@ -67,12 +70,13 @@ if (isset($_GET['id'])) {
             cidade,
             estado,
             cep,
+            instagram,
             tipo
         ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     $stmt->bind_param(
-        "sssssisssss",
+        "sssssissssss",
         $nome,
         $email,
         $cpf_cnpj,
@@ -83,6 +87,7 @@ if (isset($_GET['id'])) {
         $cidade,
         $estado,
         $cep,
+        $instagram,
         $tipo
     );
 }

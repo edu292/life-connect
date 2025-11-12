@@ -85,6 +85,7 @@ async function carregarDados() {
                         <td>${lote.quantidade}</td>
                         <td>${lote.peso_total}</td>
                         <td>${lote.data_validade}</td>
+                        <td>${lote.instagram}</td>
                         <td>
                             <a class="btn btn-secondary btn-sm" href='javascript:completarFormularioLote(${lote.id})'>Alterar</a>
                             <a class="btn btn-danger btn-sm" href='javascript:excluir(${lote.id})'>Excluir</a>

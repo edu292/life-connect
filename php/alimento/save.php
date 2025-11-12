@@ -9,15 +9,16 @@ $retorno = [
 ];
 
 $nome = $_POST['nome'];
+$instagram = $_POST['instagram'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE alimentos SET nome = ? WHERE id = ?');
-    $stmt->bind_param('si', $nome, $id);
+    $stmt = $conexao->prepare('UPDATE alimentos SET nome = ?, instagram = ? WHERE id = ?');
+    $stmt->bind_param('ssi', $nome, $instagram, $id);
 } else {
     $idCategoria = $_GET['id-categoria'];
-    $stmt = $conexao->prepare('INSERT INTO alimentos (nome, id_categoria) VALUES (?, ?)');
-    $stmt->bind_param("si", $nome, $idCategoria);
+    $stmt = $conexao->prepare('INSERT INTO alimentos (nome,instagram, id_categoria) VALUES (?,?, ?)');
+    $stmt->bind_param("ssi", $nome, $instagram, $idCategoria);
 }
 
 $stmt->execute();

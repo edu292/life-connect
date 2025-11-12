@@ -9,15 +9,16 @@ $retorno = [
 ];
 
 $titulo = $_POST['titulo'];
+$instagram = $_POST['instagram'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE doacoes SET titulo = ? WHERE id = ?');
-    $stmt->bind_param('si', $titulo, $id);
+    $stmt = $conexao->prepare('UPDATE doacoes SET titulo = ?, instagram = ? WHERE id = ?');
+    $stmt->bind_param('ssi', $titulo, $instagram, $id);
 } else {
     $idDoador = $_POST['id-doador'];
-    $stmt = $conexao->prepare('INSERT INTO doacoes (titulo, id_doador) VALUES (?, ?)');
-    $stmt->bind_param("si", $titulo, $idDoador);
+    $stmt = $conexao->prepare('INSERT INTO doacoes (titulo,instagram, id_doador) VALUES (?,?, ?)');
+    $stmt->bind_param("ssi", $titulo, $instagram, $idDoador);
 }
 
 $stmt->execute();

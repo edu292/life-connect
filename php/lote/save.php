@@ -13,6 +13,7 @@ $idAlimento = $_POST['id_alimento'];
 $quantidade = $_POST['quantidade'];
 $pesoUnidade = $_POST['peso_unidade'];
 $dataValidade = $_POST['data_validade'];
+$instagram = $_POST['instagram'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -23,33 +24,36 @@ if (isset($_GET['id'])) {
             id_alimento = ?,
             quantidade = ?,
             peso_unidade = ?,
-            data_validade = ?
+            data_validade = ?,
+            instagram = ?
         WHERE 
             id = ?'
     );
     $stmt->bind_param(
-        "iidsi",
+        "iidssi",
         $idAlimento,
         $quantidade,
         $pesoUnidade,
         $dataValidade,
+        $instagram,
         $id
     );
 } elseif (isset($_GET['id-doacao'])) {
     $idDoacao = $_GET['id-doacao'];
     $stmt = $conexao->prepare(
         'INSERT INTO 
-            lotes_doacao (id_doacao, id_alimento, quantidade, peso_unidade, data_validade)
+            lotes_doacao (id_doacao, id_alimento, quantidade, peso_unidade, data_validade, instagram)
         VALUES 
-            (?, ?, ?, ?, ?)'
+            (?, ?, ?, ?, ?, ?)'
     );
     $stmt->bind_param(
-        'iiids',
+        'iiidss',
         $idDoacao,
         $idAlimento,
         $quantidade,
         $pesoUnidade,
-        $dataValidade
+        $dataValidade,
+        $instagram
     );
 } else {
     $retorno['status'] = 'nok';

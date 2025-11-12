@@ -66,6 +66,7 @@ async function carregarDados() {
         for (let alimento of alimentos) {
             html += `<tr>
                         <td>${alimento.nome}</td>
+                        <td>${alimento.instagram}</td>
                         <td>
                             <a class="btn btn-secondary btn-sm" href='javascript:completarFormularioAlimento(${alimento.id})'>Alterar</a>
                             <a class="btn btn-danger btn-sm" href='javascript:excluir(${alimento.id})'>Excluir</a>

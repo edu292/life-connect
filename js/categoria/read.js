@@ -22,6 +22,7 @@ async function carregarDados() {
             <tr>
                 <td>${categoria.nome}</td>
                 <td class="text-center">${contador}</td>
+                <td class="text-center">${categoria.instagram}</td>
                 <td class="text-center">
                     <a href="../categoria/formulario.html?id=${categoria.id}" class="btn btn-sm btn-outline-primary me-2">Alterar</a>
                     <a href="javascript:excluir(${categoria.id})" class="btn btn-sm btn-outline-danger">Excluir</a>

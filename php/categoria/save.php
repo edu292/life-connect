@@ -1,7 +1,7 @@
 <?php
 global $conexao;
 include_once('../conexao.php');
-
+header('Content-type: application/json;charset=utf-8');
 $retorno = [
     'status' => '',   // ok ou nok
     'mensagem' => '', // mensagem sucesso ou erro
@@ -9,14 +9,15 @@ $retorno = [
 ];
 
 $nome = $_POST['nome'];
+$instagram = $_POST['instagram'];
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $conexao->prepare('UPDATE categorias SET nome = ? WHERE id = ?');
-    $stmt->bind_param('si', $nome, $id);
+    $stmt = $conexao->prepare('UPDATE categorias SET nome = ?, instagram = ? WHERE id = ?');
+    $stmt->bind_param('ssi', $nome, $instagram, $id);
 } else {
-    $stmt = $conexao->prepare('INSERT INTO categorias (nome) VALUES (?)');
-    $stmt->bind_param("s", $nome);
+    $stmt = $conexao->prepare('INSERT INTO categorias (nome, instagram) VALUES (?, ?)');
+    $stmt->bind_param("ss", $nome, $instagram);
 }
 
 $stmt->execute();
@@ -33,5 +34,5 @@ if ($stmt->affected_rows == 1) {
 $stmt->close();
 $conexao->close();
 
-header('Content-type: application/json;charset=utf-8');
+
 echo json_encode($retorno);

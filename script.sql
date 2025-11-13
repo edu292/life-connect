@@ -27,7 +27,7 @@ CREATE TABLE alimentos (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     id_categoria INTEGER,
     nome VARCHAR(100),
-    FOREIGN KEY (id_categoria) REFERENCES categorias(id)
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id) ON DELETE CASCADE
 );
 
 CREATE TABLE doacoes (

@@ -106,7 +106,7 @@ INSERT INTO
     categorias (nome)
 VALUES
     ('Enlatados e Conservas');
-SET @cat_id = LAST_INSERT_ID();
+SET @cat_id = LAST_INSERT_ID(); 
 
 INSERT INTO
     alimentos (id_categoria, nome)

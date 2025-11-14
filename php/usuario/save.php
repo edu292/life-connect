@@ -9,6 +9,7 @@ $retorno = [
 ];
 
 $nome = $_POST['nome'];
+$nome_mae = $_POST['nome_mae'];
 $email = $_POST['email'];
 $cpf_cnpj = $_POST['cpf_cnpj'];
 $senha = $_POST['senha'];
@@ -26,6 +27,7 @@ if (isset($_GET['id'])) {
     $stmt = $conexao->prepare(
         'UPDATE usuarios SET 
             nome = ?, 
+            nome_mae = ?, 
             email = ?, 
             cpf_cnpj = ?, 
             senha = ?, 
@@ -40,8 +42,9 @@ if (isset($_GET['id'])) {
     );
 
     $stmt->bind_param(
-        "sssssisssssi",
+        "ssssssisssssi",
         $nome,
+        $nome_mae,
         $email,
         $cpf_cnpj,
         $senha,
@@ -58,6 +61,7 @@ if (isset($_GET['id'])) {
     $stmt = $conexao->prepare(
         'INSERT INTO usuarios (
             nome,
+            nome_mae,
             email,
             cpf_cnpj,
             senha,
@@ -69,11 +73,12 @@ if (isset($_GET['id'])) {
             cep,
             tipo
         ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     $stmt->bind_param(
-        "sssssisssss",
+        "ssssssisssss",
         $nome,
+        $nome_mae,
         $email,
         $cpf_cnpj,
         $senha,

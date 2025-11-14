@@ -11,6 +11,7 @@ async function carregarDados() {
             html += `<tr>
                         <td>${usuario.cpf_cnpj}</td>
                         <td>${usuario.nome}</td>
+                        <td>${usuario.nome_mae}</td>
                         <td>${usuario.email}</td>
                         <td>${usuario.senha}</td>
                         <td>${usuario.tipo}</td>
